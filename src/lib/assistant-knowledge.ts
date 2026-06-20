@@ -182,12 +182,12 @@ export const knowledgeBase: KnowledgeEntry[] = [
       "hotspot",
       "sesi",
       "bandwidth",
-      "freeradius",
+
       "autentikasi",
     ],
     replies: [
       {
-        text: "Modul **Jaringan & RADIUS** mengatur profil internet, sesi PPPoE, autentikasi, dan putus sesi dari dashboard. Terintegrasi **FreeRADIUS** & **MikroTik**.",
+        text: "Modul **Jaringan & RADIUS** mengatur profil internet, sesi PPPoE, autentikasi, dan putus sesi dari dashboard. Terintegrasi **RADIUS** & **MikroTik**.",
         links: [{ label: "Lihat modul jaringan", href: "#fitur-04" }],
       },
     ],
@@ -315,6 +315,37 @@ export const knowledgeBase: KnowledgeEntry[] = [
           { label: "Minta penawaran", href: "#kontak" },
         ],
         suggestions: ["Hubungi sales", "Evaluasi gratis?"],
+      },
+    ],
+  },
+  {
+    id: "selfhost",
+    keywords: [
+      "server sendiri",
+      "self host",
+      "self-hosted",
+      "saas",
+      "cloud",
+      "kenapa install",
+      "mengapa install",
+      "harus install",
+      "di server",
+      "on premise",
+      "on-premise",
+      "infrastruktur sendiri",
+    ],
+    patterns: [
+      /kenapa\s+(harus\s+)?install/,
+      /mengapa\s+(harus\s+)?(install|pasang)/,
+      /server\s+sendiri/,
+      /bukan\s+saas/,
+    ],
+    priority: 3,
+    replies: [
+      {
+        text: "**Accel Radius bukan SaaS cloud** — dirancang di-install di server ISP Anda.\n\nAlasan utama:\n• Data pelanggan & billing tetap di infrastruktur Anda\n• Billing & RADIUS dekat dengan jaringan — isolir lebih cepat\n• Tidak tergantung uptime vendor cloud\n• Evaluasi gratis di server lab sebelum lisensi produksi\n• Biaya skala lebih terprediksi tanpa biaya per-pelanggan SaaS",
+        links: [{ label: "Mengapa self-hosted", href: "#mengapa-self-host" }],
+        suggestions: ["Syarat server", "Pasang sekarang", "Model lisensi"],
       },
     ],
   },

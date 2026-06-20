@@ -7,13 +7,23 @@ import Parallax from "@/components/Parallax"
 import { CustomerIllustration } from "@/components/illustrations/AccelRadMocks"
 import { audiences } from "@/lib/features-data"
 import { prefersReducedMotion } from "@/lib/parallax"
-import { BRAND_ICON, BRAND_LOGO, BRAND_NAME, BRAND_TAGLINE } from "@/lib/brand"
+import {
+  BRAND_ICON,
+  BRAND_LOGO,
+  BRAND_NAME,
+  BRAND_TAGLINE,
+  WHATSAPP_URL,
+} from "@/lib/brand"
+import { ArrowRight, MessageCircle } from "lucide-react"
+
+const WHATSAPP_PREFILL = encodeURIComponent(
+  "Halo tim Accel Radius, saya tertarik platform billing & operasi ISP. Bisa konsultasi?",
+)
 
 gsap.registerPlugin(useGSAP)
 
 const highlights = [
   { value: "9", label: "Modul terintegrasi" },
-  { value: "5", label: "Layanan sistem" },
   { value: "24/7", label: "Operasi realtime" },
 ]
 
@@ -107,14 +117,35 @@ export default function Hero() {
           </FadeContent>
 
           <FadeContent delay={550} playOnMount>
-            <div className="flex flex-wrap gap-4">
-              <a href="#fitur" className="modern-btn-primary">
-                Lihat fitur
-                <span aria-hidden>→</span>
-              </a>
-              <a href="#install" className="modern-btn-ghost">
-                Cara install
-              </a>
+            <div className="space-y-4">
+              <div className="flex flex-wrap gap-3">
+                <a href="#install" className="modern-btn-primary">
+                  Pasang sekarang
+                  <ArrowRight className="size-4" aria-hidden />
+                </a>
+                <a
+                  href={`${WHATSAPP_URL}?text=${WHATSAPP_PREFILL}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="modern-btn-ghost"
+                >
+                  <MessageCircle className="size-4" aria-hidden />
+                  Hubungi WhatsApp
+                </a>
+                <a href="#kontak" className="modern-btn-ghost">
+                  Konsultasi lisensi
+                </a>
+              </div>
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                Evaluasi gratis di server Anda — atau{" "}
+                <a
+                  href="#harga"
+                  className="font-medium text-foreground underline-offset-2 hover:text-brand-red hover:underline"
+                >
+                  lihat paket lisensi
+                </a>{" "}
+                sebelum komit produksi.
+              </p>
             </div>
           </FadeContent>
 

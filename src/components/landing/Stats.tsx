@@ -4,7 +4,6 @@ import Parallax from "@/components/Parallax"
 
 const stats = [
   { value: 9, suffix: "", label: "Modul terintegrasi", hint: "Billing hingga RADIUS" },
-  { value: 5, suffix: "", label: "Layanan sistem", hint: "API · Worker · WA" },
   { value: 24, suffix: "/7", label: "Operasi realtime", hint: "Heartbeat & queue" },
   { value: 100, suffix: "%", label: "Satu dashboard", hint: "Tanpa app terpisah" },
 ]
@@ -24,7 +23,7 @@ export default function Stats() {
           </p>
         </FadeContent>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {stats.map((stat) => (
             <FadeContent key={stat.label} duration={900}>
               <div

@@ -1,0 +1,66 @@
+---
+import SelfHostTopology from "./SelfHostTopology"
+import { selfHostReasons } from "../../lib/landing-content"
+---
+
+<section id="mengapa-self-host" class="relative scroll-mt-20 overflow-hidden border-y border-border py-16 md:py-24">
+  <div
+    data-parallax="40"
+    data-parallax-trigger="#mengapa-self-host"
+    class="pointer-events-none absolute -right-24 top-16 size-80 rounded-full bg-brand-blue/8 blur-3xl will-change-transform"
+  >
+  </div>
+  <div
+    data-parallax="-35"
+    data-parallax-trigger="#mengapa-self-host"
+    class="pointer-events-none absolute -left-16 bottom-12 size-64 rounded-full bg-brand-red/8 blur-3xl will-change-transform"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-6">
+    <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-16">
+      <div data-animate="reveal-left" class="lg:sticky lg:top-28">
+        <p class="mb-2 text-sm font-semibold text-brand-blue">Self-hosted</p>
+        <h2 class="text-3xl font-bold tracking-tight md:text-4xl lg:text-[2.75rem] lg:leading-[1.08]">
+          Mengapa harus di-install di server sendiri?
+        </h2>
+        <p class="mt-4 text-base leading-relaxed text-muted-foreground md:text-lg">
+          Accel Radius bukan SaaS cloud. Platform ini dirancang untuk berjalan di
+          infrastruktur ISP — tempat data pelanggan, billing, dan kontrol jaringan
+          seharusnya berada: dekat operasi Anda, di bawah kendali Anda.
+        </p>
+        <p class="mt-4 text-sm leading-relaxed text-muted-foreground">
+          Untuk operator yang sudah menjalankan server Linux, ini bukan langkah
+          tambahan yang rumit — melainkan cara paling masuk akal menyatukan billing
+          dan operasi tanpa menyerahkan data inti ke pihak lain.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#install" class="modern-btn-primary">Pasang di server Anda</a>
+          <a href="#persyaratan" class="modern-btn-ghost">Lihat persyaratan</a>
+        </div>
+      </div>
+
+      <div data-stagger class="grid gap-4 sm:grid-cols-2">
+        {
+          selfHostReasons.map((reason, i) => (
+            <article
+              data-stagger-item
+              data-hover-lift
+              class="rounded-2xl border border-border bg-background p-5 md:p-6"
+            >
+              <span class="mb-3 inline-flex size-8 items-center justify-center rounded-lg bg-muted text-xs font-bold text-foreground">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 class="text-base font-bold tracking-tight">{reason.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
+                {reason.description}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+
+    <SelfHostTopology client:visible />
+  </div>
+</section>

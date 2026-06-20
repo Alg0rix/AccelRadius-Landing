@@ -38,7 +38,7 @@ export const compareAfter = [
 export const integrations = [
   { name: "Tripay", category: "Pembayaran", description: "Virtual account & QRIS" },
   { name: "Duitku", category: "Pembayaran", description: "Multi-channel payment" },
-  { name: "FreeRADIUS", category: "Jaringan", description: "Autentikasi PPPoE & hotspot" },
+  { name: "RADIUS", category: "Jaringan", description: "Autentikasi PPPoE & hotspot" },
   { name: "MikroTik", category: "Jaringan", description: "NAS & profil bandwidth" },
   { name: "WhatsApp", category: "Notifikasi", description: "Tagihan, reminder, broadcast" },
   { name: "Systemd", category: "Infrastruktur", description: "Layanan API, worker, WA" },
@@ -113,6 +113,77 @@ export const pricingTiers = [
   },
 ]
 
+export const selfHostReasons = [
+  {
+    title: "Data tetap di infrastruktur Anda",
+    description:
+      "Profil pelanggan, tagihan, log sesi, dan riwayat pembayaran disimpan di server yang Anda kelola — bukan di cloud pihak ketiga yang tidak Anda kontrol.",
+  },
+  {
+    title: "Dekat dengan jaringan & RADIUS",
+    description:
+      "Billing dan kontrol akses berjalan di lingkungan yang sama dengan NAS, MikroTik, dan RADIUS. Isolir pelanggan dan sinkronisasi sesi jadi lebih cepat dan andal.",
+  },
+  {
+    title: "Operasi tidak bergantung SaaS eksternal",
+    description:
+      "Gangguan layanan cloud vendor tidak menghentikan operasi harian ISP. Anda tentukan jadwal maintenance, backup, dan kebijakan keamanan sendiri.",
+  },
+  {
+    title: "Cocok dengan stack ISP yang sudah ada",
+    description:
+      "Kebanyakan operator sudah punya VPS atau dedicated server untuk panel, monitoring, atau RADIUS. Accel Radius masuk ke infrastruktur itu — tanpa migrasi ke platform baru.",
+  },
+  {
+    title: "Evaluasi nyata sebelum komit lisensi",
+    description:
+      "Pasang di server lab atau staging, uji alur tagihan dan jaringan dengan data Anda sendiri, baru putuskan lisensi produksi setelah yakin cocok.",
+  },
+  {
+    title: "Biaya skala lebih terprediksi",
+    description:
+      "Model lisensi + server sendiri menghindari biaya per-pelanggan SaaS yang membengkak seiring pertumbuhan. Infrastruktur mengikuti kebutuhan, bukan paket cloud tetap.",
+  },
+]
+
+export const selfHostTopology = {
+  cloud: {
+    label: "SaaS cloud",
+    subtitle: "Billing jauh dari jaringan operasi",
+    flowNote: "Data naik ke internet · sinkron billing–RADIUS sering terputus",
+    impacts: [
+      { label: "Latency isolir", tone: "bad" as const },
+      { label: "Uptime vendor", tone: "bad" as const },
+      { label: "Data di luar ISP", tone: "bad" as const },
+    ],
+  },
+  selfHosted: {
+    label: "Self-hosted",
+    subtitle: "Billing & RADIUS dalam satu lingkungan ISP",
+    flowNote: "Alur lokal · isolir & sinkron tagihan berjalan realtime",
+    impacts: [
+      { label: "Isolir instan", tone: "good" as const },
+      { label: "Data lokal", tone: "good" as const },
+      { label: "Kontrol penuh", tone: "good" as const },
+    ],
+  },
+}
+
+export const selfHostContrast = {
+  cloud: [
+    "Data pelanggan di server vendor",
+    "Ketergantungan uptime & kebijakan pihak ketiga",
+    "Integrasi RADIUS bisa terpisah jauh dari billing",
+    "Sulit uji menyeluruh sebelum kontrak tahunan",
+  ],
+  selfHosted: [
+    "Data & backup di server Anda",
+    "Kontrol penuh operasi, update, dan keamanan",
+    "Billing & RADIUS dalam satu lingkungan jaringan",
+    "Evaluasi gratis di server sendiri dulu",
+  ],
+}
+
 export const systemRequirements = [
   {
     title: "Sistem operasi",
@@ -156,7 +227,7 @@ export const faqItems = [
   {
     question: "Apakah RADIUS dan MikroTik didukung?",
     answer:
-      "Ya. Platform mendukung autentikasi PPPoE/hotspot melalui FreeRADIUS dan integrasi NAS seperti MikroTik — profil bandwidth, sesi aktif, dan isolir dari dashboard.",
+      "Ya. Platform mendukung autentikasi PPPoE/hotspot melalui RADIUS dan integrasi NAS seperti MikroTik — profil bandwidth, sesi aktif, dan isolir dari dashboard.",
   },
   {
     question: "Bagaimana setup notifikasi WhatsApp?",
@@ -172,6 +243,11 @@ export const faqItems = [
     question: "Bagaimana model lisensi dan dukungan?",
     answer:
       "Evaluasi gratis via installer di server Anda. Untuk produksi, lisensi Profesional dan Enterprise tersedia dengan dukungan dan update — hubungi tim kami untuk penawaran.",
+  },
+  {
+    question: "Kenapa harus install di server sendiri, bukan SaaS cloud?",
+    answer:
+      "Accel Radius dirancang self-hosted agar data pelanggan dan operasi billing–RADIUS tetap di infrastruktur ISP. Anda kontrol backup, keamanan, dan uptime sendiri; bisa evaluasi penuh di server lab sebelum komit lisensi produksi.",
   },
 ]
 
