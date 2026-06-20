@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Header from "../components/landing/Header"
+import Hero from "../components/landing/Hero"
+import Features from "../components/landing/Features"
+import Stats from "../components/landing/Stats"
+import Stack from "../components/landing/Stack"
+import Cta from "../components/landing/Cta"
+import Footer from "../components/landing/Footer"
+import { BRAND_FULL } from "../lib/brand"
+---
+
+<Layout title={`${BRAND_FULL} — Platform Lisensi Komersial`}>
+  <Header client:load />
+  <main>
+    <Hero client:visible />
+    <Features client:visible />
+    <Stats client:visible />
+    <Stack client:visible />
+    <Cta client:visible />
+  </main>
+  <Footer client:load />
+</Layout>

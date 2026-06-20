@@ -1,0 +1,30 @@
+---
+import "../styles/global.css"
+import { BRAND_FULL } from "../lib/brand"
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+const {
+  title = BRAND_FULL,
+  description = "Platform lisensi komersial untuk aplikasi Go — terbitkan kunci, lacak aktivasi, dan tegakkan kebijakan mesin.",
+} = Astro.props
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/logo192.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="antialiased">
+    <slot />
+  </body>
+</html>
