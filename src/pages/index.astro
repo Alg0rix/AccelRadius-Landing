@@ -1,23 +1,41 @@
 ---
 import Layout from "../layouts/Layout.astro"
-import Header from "../components/landing/Header"
+import Header from "../components/landing/Header.astro"
 import Hero from "../components/landing/Hero"
+import HowItWorks from "../components/landing/HowItWorks.astro"
+import Compare from "../components/landing/Compare.astro"
+import FeatureList from "../components/landing/FeatureList.astro"
 import Features from "../components/landing/Features"
+import Integrations from "../components/landing/Integrations.astro"
 import Stats from "../components/landing/Stats"
-import Stack from "../components/landing/Stack"
+import Testimonials from "../components/landing/Testimonials.astro"
+import Pricing from "../components/landing/Pricing.astro"
+import Requirements from "../components/landing/Requirements.astro"
+import Install from "../components/landing/Install"
+import Resources from "../components/landing/Resources.astro"
+import Faq from "../components/landing/Faq.astro"
 import Cta from "../components/landing/Cta"
-import Footer from "../components/landing/Footer"
+import Footer from "../components/landing/Footer.astro"
 import { BRAND_FULL } from "../lib/brand"
 ---
 
-<Layout title={`${BRAND_FULL} — Platform Lisensi Komersial`}>
-  <Header client:load />
+<Layout title={`${BRAND_FULL} — Platform Billing & Operasi ISP`}>
+  <Header />
   <main>
-    <Hero client:visible />
+    <Hero client:only="react" />
+    <HowItWorks />
+    <Compare />
+    <FeatureList />
     <Features client:visible />
-    <Stats client:visible />
-    <Stack client:visible />
+    <Integrations />
+    <Stats client:only="react" />
+    <Testimonials />
+    <Pricing />
+    <Requirements />
+    <Install client:visible />
+    <Resources />
+    <Faq />
     <Cta client:visible />
   </main>
-  <Footer client:load />
+  <Footer />
 </Layout>

@@ -1,0 +1,66 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Header from "../components/landing/Header.astro"
+import Footer from "../components/landing/Footer.astro"
+import { BRAND_FULL, BRAND_NAME, SUPPORT_EMAIL } from "../lib/brand"
+
+const year = new Date().getFullYear()
+---
+
+<Layout
+  title={`Kebijakan Privasi — ${BRAND_FULL}`}
+  description={`Kebijakan privasi penggunaan situs dan layanan ${BRAND_NAME}.`}
+  canonicalPath="/privacy"
+>
+  <Header />
+  <main class="mx-auto max-w-3xl px-6 py-16 md:py-24">
+    <h1 class="text-3xl font-bold tracking-tight">Kebijakan Privasi</h1>
+    <p class="mt-2 text-sm text-muted-foreground">Terakhir diperbarui: {year}</p>
+
+    <div class="prose prose-neutral mt-8 max-w-none space-y-6 text-sm leading-relaxed text-muted-foreground">
+      <p>
+        Kebijakan ini menjelaskan bagaimana {BRAND_NAME} menangani informasi yang
+        dikumpulkan melalui situs web dan komunikasi terkait produk kami.
+      </p>
+
+      <section>
+        <h2 class="text-lg font-bold text-foreground">Data yang dikumpulkan</h2>
+        <p class="mt-2">
+          Saat Anda menghubungi kami melalui formulir, email, atau WhatsApp, kami dapat
+          menyimpan nama, nama perusahaan/ISP, alamat email, skala pelanggan, dan isi
+          pesan untuk keperluan dukungan dan penjualan.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-foreground">Penggunaan data</h2>
+        <p class="mt-2">
+          Data digunakan untuk merespons permintaan, menyediakan dukungan teknis,
+          mengelola lisensi, dan meningkatkan layanan. Kami tidak menjual data pribadi
+          kepada pihak ketiga.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-foreground">Penyimpanan & keamanan</h2>
+        <p class="mt-2">
+          Data disimpan selama diperlukan untuk tujuan layanan dan dilindungi dengan
+          praktik keamanan yang wajar. Instalasi Accel Radius di server pelanggan berada
+          di bawah kendali dan tanggung jawab operator ISP masing-masing.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-foreground">Hak Anda</h2>
+        <p class="mt-2">
+          Anda dapat meminta akses, koreksi, atau penghapusan data kontak dengan
+          menghubungi kami di{" "}
+          <a href={`mailto:${SUPPORT_EMAIL}`} class="text-brand-blue hover:underline">
+            {SUPPORT_EMAIL}
+          </a>.
+        </p>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Layout>

@@ -17,6 +17,7 @@ export interface SplitTextProps {
   to?: gsap.TweenVars;
   threshold?: number;
   rootMargin?: string;
+  playOnMount?: boolean;
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
   textAlign?: React.CSSProperties['textAlign'];
   onLetterAnimationComplete?: () => void;
@@ -33,6 +34,7 @@ const SplitText: React.FC<SplitTextProps> = ({
   to = { opacity: 1, y: 0 },
   threshold = 0.1,
   rootMargin = '-100px',
+  playOnMount = false,
   tag = 'p',
   textAlign = 'center',
   onLetterAnimationComplete
@@ -102,29 +104,39 @@ const SplitText: React.FC<SplitTextProps> = ({
         reduceWhiteSpace: false,
         onSplit: (self: GSAPSplitText) => {
           assignTargets(self);
-          return gsap.fromTo(
-            targets,
-            { ...from },
-            {
-              ...to,
-              duration,
-              ease,
-              stagger: delay / 1000,
-              scrollTrigger: {
-                trigger: el,
-                start,
-                once: true,
-                fastScrollEnd: true,
-                anticipatePin: 0.4
-              },
-              onComplete: () => {
-                animationCompletedRef.current = true;
-                onCompleteRef.current?.();
-              },
-              willChange: 'transform, opacity',
-              force3D: true
-            }
-          );
+          const tweenVars: gsap.TweenVars = {
+            ...to,
+            duration,
+            ease,
+            stagger: delay / 1000,
+            onComplete: () => {
+              animationCompletedRef.current = true;
+              onCompleteRef.current?.();
+            },
+            willChange: 'transform, opacity',
+            force3D: true
+          };
+
+          if (!playOnMount) {
+            tweenVars.scrollTrigger = {
+              trigger: el,
+              start,
+              once: true,
+              fastScrollEnd: true,
+              anticipatePin: 0.4
+            };
+          }
+
+          const tween = gsap.fromTo(targets, { ...from }, tweenVars);
+
+          if (!playOnMount) {
+            requestAnimationFrame(() => {
+              ScrollTrigger.refresh();
+              if (tween.scrollTrigger?.isActive) tween.play();
+            });
+          }
+
+          return tween;
         }
       });
       el._rbsplitInstance = splitInstance;
@@ -149,6 +161,7 @@ const SplitText: React.FC<SplitTextProps> = ({
         JSON.stringify(to),
         threshold,
         rootMargin,
+        playOnMount,
         fontsLoaded
       ],
       scope: ref

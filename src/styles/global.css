@@ -138,11 +138,51 @@
 }
 
 @layer components {
-  .swiss-grid {
+  .mesh-hero {
+    background-color: var(--background);
     background-image:
-      linear-gradient(to right, oklch(0.145 0 0 / 0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(0.145 0 0 / 0.04) 1px, transparent 1px);
-    background-size: 80px 80px;
+      radial-gradient(at 88% 12%, rgba(43, 95, 217, 0.08) 0, transparent 45%),
+      radial-gradient(at 8% 78%, rgba(255, 77, 0, 0.07) 0, transparent 40%),
+      linear-gradient(to right, oklch(0.145 0 0 / 0.025) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0.145 0 0 / 0.025) 1px, transparent 1px);
+    background-size: auto, auto, 64px 64px, 64px 64px;
+  }
+
+  .glass-card {
+    @apply border-border/60 bg-background/70 backdrop-blur-md;
+  }
+
+  .glass-dark {
+    @apply bg-white/5 backdrop-blur-md;
+  }
+
+  .cta-glow {
+    box-shadow:
+      0 0 0 1px oklch(1 0 0 / 0.06),
+      0 24px 80px -12px oklch(0.145 0 0 / 0.45);
+  }
+
+  .modern-btn-primary {
+    @apply inline-flex items-center gap-2 rounded-full bg-brand-red px-6 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:bg-foreground hover:shadow-lg;
+  }
+
+  .modern-btn-ghost {
+    @apply inline-flex items-center gap-2 rounded-full border border-border bg-background px-6 py-3 text-sm font-semibold transition-all hover:border-foreground hover:bg-muted;
+  }
+
+  .modern-btn-ghost-on-dark {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-background transition-all hover:bg-white/10;
+  }
+
+  .ar-mock {
+    @apply bg-[#14141a] text-white;
+    font-family: system-ui, sans-serif;
+  }
+
+  .install-cta {
+    box-shadow:
+      0 0 0 1px oklch(1 0 0 / 0.04),
+      0 32px 80px -20px oklch(0.45 0.2 277 / 0.45);
   }
 
   .swiss-btn-primary {
@@ -151,5 +191,13 @@
 
   .swiss-btn-outline {
     @apply bg-transparent transition-colors hover:bg-foreground hover:text-background;
+  }
+
+  .swiss-feature-grid {
+    @apply gap-px border border-foreground/10 bg-foreground/10;
+  }
+
+  .swiss-feature-card {
+    @apply bg-background;
   }
 }

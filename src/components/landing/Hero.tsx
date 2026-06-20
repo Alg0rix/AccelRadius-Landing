@@ -1,84 +1,116 @@
 import SplitText from "@/components/SplitText"
 import FadeContent from "@/components/FadeContent"
-import { BRAND_ICON, BRAND_NAME, BRAND_TAGLINE } from "@/lib/brand"
+import { CustomerIllustration } from "@/components/illustrations/AccelRadMocks"
+import { audiences } from "@/lib/features-data"
+import { BRAND_ICON, BRAND_LOGO, BRAND_NAME, BRAND_TAGLINE } from "@/lib/brand"
+
+const highlights = [
+  { value: "9", label: "Modul terintegrasi" },
+  { value: "5", label: "Layanan sistem" },
+  { value: "24/7", label: "Operasi realtime" },
+]
 
 export default function Hero() {
   return (
-    <section className="swiss-grid relative min-h-[90vh] border-b border-foreground">
-      <div className="mx-auto grid max-w-7xl grid-cols-12 gap-0 px-6 py-16 lg:py-24">
-        <div className="col-span-12 flex items-center gap-4 border-b border-foreground pb-8 lg:col-span-8">
-          <img
-            src={BRAND_ICON}
-            alt={BRAND_NAME}
-            className="size-12 object-contain"
-          />
+    <section className="mesh-hero relative overflow-hidden">
+      <div className="pointer-events-none absolute -right-32 top-20 size-[480px] rounded-full bg-brand-blue/10 blur-3xl" />
+      <div className="pointer-events-none absolute -left-20 bottom-0 size-[360px] rounded-full bg-brand-red/10 blur-3xl" />
+
+      <div className="relative mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-2 lg:items-center lg:py-24">
+        <div className="space-y-8">
+          <FadeContent duration={800} playOnMount>
+            <div className="inline-flex items-center gap-3 rounded-full border border-border bg-background/80 px-4 py-2 backdrop-blur-sm">
+              <img src={BRAND_ICON} alt={BRAND_NAME} className="size-7 object-contain" />
+              <span className="text-xs font-semibold text-muted-foreground">
+                {BRAND_NAME} · {BRAND_TAGLINE}
+              </span>
+            </div>
+          </FadeContent>
+
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-red">
-              {BRAND_TAGLINE}
+            <p className="mb-4 text-sm font-semibold text-brand-blue">
+              Platform all-in-one untuk ISP Indonesia
             </p>
-            <p className="text-sm font-bold uppercase tracking-[0.2em]">
-              {BRAND_NAME}
-            </p>
+            <SplitText
+              text="Satu platform untuk billing, jaringan, dan operasi ISP."
+              tag="h1"
+              className="text-left text-4xl font-bold leading-[1.05] tracking-tight md:text-5xl lg:text-6xl"
+              splitType="words"
+              delay={70}
+              textAlign="left"
+              playOnMount
+              from={{ opacity: 0, y: 50 }}
+              to={{ opacity: 1, y: 0 }}
+            />
           </div>
-        </div>
 
-        <div className="col-span-12 border-b border-foreground py-12 lg:col-span-8 lg:border-r lg:py-20">
-          <p className="mb-6 text-[11px] font-bold uppercase tracking-[0.28em] text-brand-blue">
-            Platform Lisensi Komersial
-          </p>
-          <SplitText
-            text="Kelola Lisensi Aplikasi Go dengan Presisi"
-            tag="h1"
-            className="text-left text-4xl font-bold uppercase leading-[0.95] tracking-tight md:text-6xl lg:text-7xl"
-            splitType="words"
-            delay={80}
-            textAlign="left"
-            from={{ opacity: 0, y: 60 }}
-            to={{ opacity: 1, y: 0 }}
-          />
-          <FadeContent blur duration={1200} delay={400}>
-            <p className="mt-8 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              Terbitkan kunci lisensi, lacak aktivasi mesin, tegakkan kebijakan IP
-              lokal, dan pantau armada aplikasi Go Anda — semua dari satu panel
-              kontrol.
+          <FadeContent blur duration={1000} delay={300} playOnMount>
+            <p className="max-w-lg text-base leading-relaxed text-muted-foreground md:text-lg">
+              Satukan pelanggan, tagihan, pembayaran, RADIUS, WhatsApp, dan laporan
+              dalam satu dashboard modern — bukan lagi spreadsheet dan lima aplikasi
+              berbeda.
             </p>
           </FadeContent>
-        </div>
 
-        <div className="col-span-12 flex flex-col justify-end gap-6 py-12 lg:col-span-4 lg:py-20 lg:pl-12">
-          <FadeContent duration={1000} delay={600}>
-            <div className="space-y-4">
-              <a
-                href="#fitur"
-                className="swiss-btn-primary inline-flex w-full items-center justify-between px-6 py-4 text-sm font-bold uppercase tracking-widest"
-              >
-                Jelajahi Fitur
+          <FadeContent delay={450} playOnMount>
+            <div className="flex flex-wrap gap-3">
+              {audiences.map((item) => (
+                <span
+                  key={item}
+                  className="rounded-full border border-border bg-background px-4 py-2 text-xs font-medium text-foreground/80"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </FadeContent>
+
+          <FadeContent delay={550} playOnMount>
+            <div className="flex flex-wrap gap-4">
+              <a href="#fitur" className="modern-btn-primary">
+                Lihat fitur
                 <span aria-hidden>→</span>
               </a>
-              <a
-                href="#kontak"
-                className="swiss-btn-outline inline-flex w-full items-center justify-between border border-foreground px-6 py-4 text-sm font-bold uppercase tracking-widest"
-              >
-                Hubungi Kami
-                <span aria-hidden>→</span>
+              <a href="#install" className="modern-btn-ghost">
+                Cara install
               </a>
             </div>
           </FadeContent>
-          <div className="grid grid-cols-2 gap-px bg-foreground">
-            <div className="bg-background p-4">
-              <p className="text-2xl font-bold">130+</p>
-              <p className="text-[10px] uppercase tracking-widest text-muted-foreground">
-                Komponen UI
-              </p>
+
+          <FadeContent delay={650} playOnMount>
+            <div className="flex flex-wrap gap-6 pt-2">
+              {highlights.map((h) => (
+                <div key={h.label}>
+                  <p className="text-2xl font-bold text-foreground">{h.value}</p>
+                  <p className="text-xs text-muted-foreground">{h.label}</p>
+                </div>
+              ))}
             </div>
-            <div className="bg-brand-red p-4 text-white">
-              <p className="text-2xl font-bold">Go</p>
-              <p className="text-[10px] uppercase tracking-widest opacity-80">
-                SDK Siap Pakai
+          </FadeContent>
+        </div>
+
+        <FadeContent delay={400} duration={1200} playOnMount>
+          <div className="relative">
+            <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#14141a] shadow-2xl ring-1 ring-white/5">
+              <CustomerIllustration className="w-full" />
+            </div>
+            <div className="absolute -bottom-6 -left-4 rounded-2xl border bg-background p-4 shadow-lg md:-left-8">
+              <img src={BRAND_LOGO} alt={BRAND_NAME} className="h-10 w-auto object-contain" />
+            </div>
+            <div className="absolute -right-2 top-8 rounded-xl border border-brand-red/30 bg-brand-red px-4 py-3 text-white shadow-lg md:-right-6">
+              <p className="text-[10px] font-bold uppercase tracking-wider opacity-80">
+                Pelanggan aktif
               </p>
+              <p className="text-2xl font-bold">247</p>
+            </div>
+            <div className="absolute -left-2 top-1/3 rounded-xl border bg-background px-4 py-3 shadow-lg md:-left-6">
+              <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                Tagihan bulan ini
+              </p>
+              <p className="text-lg font-bold text-brand-blue">Rp 48,5jt</p>
             </div>
           </div>
-        </div>
+        </FadeContent>
       </div>
     </section>
   )

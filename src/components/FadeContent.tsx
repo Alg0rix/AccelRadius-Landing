@@ -14,6 +14,7 @@ interface FadeContentProps extends React.HTMLAttributes<HTMLDivElement> {
   delay?: number;
   threshold?: number;
   initialOpacity?: number;
+  playOnMount?: boolean;
   disappearAfter?: number;
   disappearDuration?: number;
   disappearEase?: string;
@@ -30,6 +31,7 @@ const FadeContent: React.FC<FadeContentProps> = ({
   delay = 0,
   threshold = 0.1,
   initialOpacity = 0,
+  playOnMount = false,
   disappearAfter = 0,
   disappearDuration = 0.5,
   disappearEase = 'power2.in',
@@ -84,12 +86,25 @@ const FadeContent: React.FC<FadeContentProps> = ({
       ease: ease
     });
 
+    if (playOnMount) {
+      tl.play();
+      return () => {
+        tl.kill();
+        gsap.killTweensOf(el);
+      };
+    }
+
     const st = ScrollTrigger.create({
       trigger: el,
       scroller: scrollerTarget || window,
       start: `top ${startPct}%`,
       once: true,
       onEnter: () => tl.play()
+    });
+
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+      if (st.isActive) tl.play();
     });
 
     return () => {

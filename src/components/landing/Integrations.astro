@@ -1,0 +1,30 @@
+---
+import { integrations } from "../../lib/landing-content"
+---
+
+<section id="integrasi" class="scroll-mt-20 border-b border-border py-16 md:py-20">
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="mb-10 max-w-2xl">
+      <p class="mb-2 text-sm font-semibold text-brand-blue">Ekosistem</p>
+      <h2 class="text-3xl font-bold tracking-tight md:text-4xl">Terintegrasi dengan stack ISP</h2>
+      <p class="mt-3 text-muted-foreground">
+        Pembayaran, jaringan, dan komunikasi pelanggan — terhubung ke layanan yang
+        sudah umum dipakai operator Indonesia.
+      </p>
+    </div>
+
+    <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        integrations.map((item) => (
+          <div class="rounded-xl border border-border bg-background p-5 transition-colors hover:border-brand-blue/30">
+            <p class="text-[10px] font-semibold uppercase tracking-wider text-brand-red">
+              {item.category}
+            </p>
+            <p class="mt-1 text-lg font-bold tracking-tight">{item.name}</p>
+            <p class="mt-1 text-sm text-muted-foreground">{item.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

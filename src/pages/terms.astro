@@ -1,0 +1,73 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Header from "../components/landing/Header.astro"
+import Footer from "../components/landing/Footer.astro"
+import { BRAND_FULL, BRAND_NAME, SUPPORT_EMAIL } from "../lib/brand"
+
+const year = new Date().getFullYear()
+---
+
+<Layout
+  title={`Syarat Penggunaan — ${BRAND_FULL}`}
+  description={`Syarat penggunaan perangkat lunak dan layanan ${BRAND_NAME}.`}
+  canonicalPath="/terms"
+>
+  <Header />
+  <main class="mx-auto max-w-3xl px-6 py-16 md:py-24">
+    <h1 class="text-3xl font-bold tracking-tight">Syarat Penggunaan</h1>
+    <p class="mt-2 text-sm text-muted-foreground">Terakhir diperbarui: {year}</p>
+
+    <div class="mt-8 space-y-6 text-sm leading-relaxed text-muted-foreground">
+      <p>
+        Dengan mengunduh, memasang, atau menggunakan {BRAND_NAME}, Anda menyetujui
+        syarat berikut.
+      </p>
+
+      <section>
+        <h2 class="text-lg font-bold text-foreground">Lisensi perangkat lunak</h2>
+        <p class="mt-2">
+          {BRAND_NAME} adalah perangkat lunak berlisensi tertutup. Kode sumber tidak
+          dibuka untuk umum. Penggunaan produksi memerlukan lisensi yang berlaku sesuai
+          perjanjian dengan penyedia.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-foreground">Pembatasan</h2>
+        <p class="mt-2">
+          Dilarang membongkar, mendistribusikan ulang, menyewakan, atau memodifikasi
+          perangkat lunak tanpa izin tertulis, kecuali diizinkan secara eksplisit dalam
+          perjanjian lisensi Anda.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-foreground">Dukungan & ketersediaan</h2>
+        <p class="mt-2">
+          Fitur dan ketersediaan layanan dapat berubah seiring pembaruan produk.
+          Tingkat dukungan bergantung pada paket lisensi yang Anda miliki.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-foreground">Batasan tanggung jawab</h2>
+        <p class="mt-2">
+          Produk disediakan untuk operasional ISP sesuai dokumentasi. Operator bertanggung
+          jawab atas backup data, kepatuhan regulasi lokal, dan konfigurasi infrastruktur
+          server mereka.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-foreground">Kontak</h2>
+        <p class="mt-2">
+          Pertanyaan hukum atau lisensi:{" "}
+          <a href={`mailto:${SUPPORT_EMAIL}`} class="text-brand-blue hover:underline">
+            {SUPPORT_EMAIL}
+          </a>
+        </p>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Layout>
