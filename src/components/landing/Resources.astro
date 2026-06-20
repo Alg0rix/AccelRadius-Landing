@@ -11,7 +11,7 @@ const hrefMap = {
 
 <section id="rilis" class="scroll-mt-20 border-b border-border py-16 md:py-20">
   <div class="mx-auto max-w-7xl px-6">
-    <div class="mb-10 max-w-2xl">
+    <div data-animate="reveal" class="mb-10 max-w-2xl">
       <p class="mb-2 text-sm font-semibold text-brand-red">Dokumentasi</p>
       <h2 class="text-3xl font-bold tracking-tight md:text-4xl">Rilis & panduan</h2>
       <p class="mt-3 text-muted-foreground">
@@ -20,22 +20,24 @@ const hrefMap = {
       </p>
     </div>
 
-    <div class="grid gap-4 md:grid-cols-3">
+    <div data-stagger class="grid gap-4 md:grid-cols-3">
       {
         resourceLinks.map((item) => (
           <a
             href={hrefMap[item.hrefKey]}
+            data-stagger-item
+            data-hover-lift
             target={item.hrefKey === "changelog" ? undefined : "_blank"}
             rel={item.hrefKey === "changelog" ? undefined : "noopener noreferrer"}
             class="group flex h-full flex-col rounded-2xl border border-border bg-background p-6 transition-all hover:border-brand-blue/40 hover:shadow-md"
           >
-            <h3 class="text-lg font-bold tracking-tight group-hover:text-brand-blue">
+            <h3 class="text-lg font-bold tracking-tight transition-colors group-hover:text-brand-blue">
               {item.title}
             </h3>
             <p class="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
               {item.description}
             </p>
-            <span class="mt-4 text-sm font-semibold text-brand-blue">
+            <span class="mt-4 text-sm font-semibold text-brand-blue transition-transform group-hover:translate-x-1">
               {item.label} →
             </span>
           </a>

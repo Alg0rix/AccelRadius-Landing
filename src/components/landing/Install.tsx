@@ -1,6 +1,9 @@
 import { useState } from "react"
+import AnimatedContent from "@/components/AnimatedContent"
 import SplitText from "@/components/SplitText"
 import FadeContent from "@/components/FadeContent"
+import Parallax from "@/components/Parallax"
+import Reveal from "@/components/Reveal"
 import { INSTALL_SCRIPT, RELEASE_REPO } from "@/lib/brand"
 
 const hooks = [
@@ -25,9 +28,21 @@ export default function Install() {
   return (
     <section id="install" className="scroll-mt-20 py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="install-cta relative overflow-hidden rounded-3xl border border-violet-500/20 bg-[#14141a] px-6 py-10 text-white md:px-12 md:py-14">
-          <div className="pointer-events-none absolute -left-24 top-0 size-72 rounded-full bg-violet-600/25 blur-3xl" />
-          <div className="pointer-events-none absolute -right-16 bottom-0 size-64 rounded-full bg-brand-red/20 blur-3xl" />
+        <Reveal>
+        <div
+          className="install-cta relative overflow-hidden rounded-3xl border border-violet-500/20 bg-[#14141a] px-6 py-10 text-white md:px-12 md:py-14"
+          data-hover-lift
+        >
+          <Parallax
+            speed={-64}
+            trigger="#install"
+            className="pointer-events-none absolute -left-24 top-0 size-72 rounded-full bg-violet-600/25 blur-3xl"
+          />
+          <Parallax
+            speed={72}
+            trigger="#install"
+            className="pointer-events-none absolute -right-16 bottom-0 size-64 rounded-full bg-brand-red/20 blur-3xl"
+          />
 
           <div className="relative grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-14">
             <div>
@@ -48,16 +63,16 @@ export default function Install() {
                   menyiapkan layanan billing, RADIUS, WhatsApp, serta portal pelanggan.
                 </p>
               </FadeContent>
-              <FadeContent delay={300}>
-                <ul className="mt-6 space-y-2.5">
-                  {hooks.map((hook) => (
-                    <li key={hook} className="flex items-start gap-2.5 text-sm text-white/80">
+              <ul className="mt-6 space-y-2.5">
+                {hooks.map((hook, i) => (
+                  <AnimatedContent key={hook} distance={20} duration={0.55} delay={0.2 + i * 0.1}>
+                    <li className="flex items-start gap-2.5 text-sm text-white/80">
                       <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand-red" />
                       {hook}
                     </li>
-                  ))}
-                </ul>
-              </FadeContent>
+                  </AnimatedContent>
+                ))}
+              </ul>
               <FadeContent delay={400}>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <button type="button" onClick={copyScript} className="modern-btn-primary">
@@ -76,7 +91,7 @@ export default function Install() {
               </FadeContent>
             </div>
 
-            <FadeContent delay={250}>
+            <AnimatedContent distance={64} direction="horizontal" duration={0.95} delay={0.15}>
               <div className="rounded-2xl border border-white/10 bg-black/40 shadow-2xl ring-1 ring-white/5">
                 <div className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
                   <div className="flex items-center gap-2">
@@ -102,9 +117,10 @@ export default function Install() {
                   Paste di terminal Linux · sudo diperlukan
                 </p>
               </div>
-            </FadeContent>
+            </AnimatedContent>
           </div>
         </div>
+        </Reveal>
       </div>
     </section>
   )

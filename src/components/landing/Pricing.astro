@@ -4,7 +4,7 @@ import { pricingTiers } from "../../lib/landing-content"
 
 <section id="harga" class="scroll-mt-20 border-y border-border bg-muted/30 py-16 md:py-20">
   <div class="mx-auto max-w-7xl px-6">
-    <div class="mb-10 max-w-2xl">
+    <div data-animate="reveal" class="mb-10 max-w-2xl">
       <p class="mb-2 text-sm font-semibold text-brand-blue">Lisensi</p>
       <h2 class="text-3xl font-bold tracking-tight md:text-4xl">Pilih paket yang sesuai</h2>
       <p class="mt-3 text-muted-foreground">
@@ -13,10 +13,12 @@ import { pricingTiers } from "../../lib/landing-content"
       </p>
     </div>
 
-    <div class="grid gap-4 lg:grid-cols-3">
+    <div data-stagger class="grid gap-4 lg:grid-cols-3">
       {
         pricingTiers.map((tier) => (
           <article
+            data-stagger-item
+            data-hover-lift
             class:list={[
               "flex h-full flex-col rounded-2xl border p-6 md:p-8",
               tier.highlighted

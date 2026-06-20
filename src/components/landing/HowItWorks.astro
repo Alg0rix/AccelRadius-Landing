@@ -4,7 +4,7 @@ import { howItWorksSteps } from "../../lib/landing-content"
 
 <section id="cara-kerja" class="scroll-mt-20 border-b border-border py-16 md:py-20">
   <div class="mx-auto max-w-7xl px-6">
-    <div class="mb-10 max-w-2xl">
+    <div data-animate="reveal" class="mb-10 max-w-2xl">
       <p class="mb-2 text-sm font-semibold text-brand-blue">Alur singkat</p>
       <h2 class="text-3xl font-bold tracking-tight md:text-4xl">Cara kerja Accel Radius</h2>
       <p class="mt-3 text-muted-foreground">
@@ -13,10 +13,14 @@ import { howItWorksSteps } from "../../lib/landing-content"
       </p>
     </div>
 
-    <ol class="grid gap-4 md:grid-cols-3">
+    <ol data-stagger class="grid gap-4 md:grid-cols-3">
       {
         howItWorksSteps.map((item) => (
-          <li class="relative rounded-2xl border border-border bg-background p-6">
+          <li
+            data-stagger-item
+            data-hover-lift
+            class="relative rounded-2xl border border-border bg-background p-6"
+          >
             <span class="mb-4 inline-flex size-10 items-center justify-center rounded-lg bg-foreground text-sm font-bold text-background">
               {item.step}
             </span>

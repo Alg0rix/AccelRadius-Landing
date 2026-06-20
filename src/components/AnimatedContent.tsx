@@ -103,6 +103,11 @@ const AnimatedContent: React.FC<AnimatedContentProps> = ({
       onEnter: () => tl.play()
     });
 
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+      if (st.isActive) tl.play();
+    });
+
     return () => {
       st.kill();
       tl.kill();

@@ -4,7 +4,7 @@ import { testimonials } from "../../lib/landing-content"
 
 <section id="testimoni" class="scroll-mt-20 py-16 md:py-20">
   <div class="mx-auto max-w-7xl px-6">
-    <div class="mb-10 max-w-2xl">
+    <div data-animate="reveal" class="mb-10 max-w-2xl">
       <p class="mb-2 text-sm font-semibold text-brand-red">Di lapangan</p>
       <h2 class="text-3xl font-bold tracking-tight md:text-4xl">
         Dipakai operator di seluruh Indonesia
@@ -15,10 +15,14 @@ import { testimonials } from "../../lib/landing-content"
       </p>
     </div>
 
-    <div class="grid gap-4 md:grid-cols-3">
+    <div data-stagger class="grid gap-4 md:grid-cols-3">
       {
         testimonials.map((item) => (
-          <figure class="flex h-full flex-col rounded-2xl border border-border bg-background p-6">
+          <figure
+            data-stagger-item
+            data-hover-lift
+            class="flex h-full flex-col rounded-2xl border border-border bg-background p-6"
+          >
             <blockquote class="flex-1 text-sm leading-relaxed text-foreground/90">
               “{item.quote}”
             </blockquote>

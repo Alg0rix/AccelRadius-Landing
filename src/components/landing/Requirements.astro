@@ -4,7 +4,7 @@ import { systemRequirements } from "../../lib/landing-content"
 
 <section id="persyaratan" class="scroll-mt-20 py-16 md:py-20">
   <div class="mx-auto max-w-7xl px-6">
-    <div class="mb-10 max-w-2xl">
+    <div data-animate="reveal" class="mb-10 max-w-2xl">
       <p class="mb-2 text-sm font-semibold text-brand-red">Infrastruktur</p>
       <h2 class="text-3xl font-bold tracking-tight md:text-4xl">Persyaratan sistem</h2>
       <p class="mt-3 text-muted-foreground">
@@ -13,10 +13,14 @@ import { systemRequirements } from "../../lib/landing-content"
       </p>
     </div>
 
-    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div data-stagger class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {
         systemRequirements.map((group) => (
-          <div class="rounded-2xl border border-border bg-background p-5">
+          <div
+            data-stagger-item
+            data-hover-lift
+            class="rounded-2xl border border-border bg-background p-5"
+          >
             <h3 class="text-sm font-bold uppercase tracking-wider">{group.title}</h3>
             <ul class="mt-4 space-y-2">
               {

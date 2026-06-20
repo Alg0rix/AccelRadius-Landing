@@ -1,3 +1,6 @@
+import AnimatedContent from "@/components/AnimatedContent"
+import Parallax from "@/components/Parallax"
+import Reveal from "@/components/Reveal"
 import type { FeatureItem } from "@/lib/features-data"
 import { cn } from "@/lib/utils"
 
@@ -12,7 +15,8 @@ export default function FeatureCard({ feature, index }: FeatureCardProps) {
   return (
     <article
       id={`fitur-${feature.number}`}
-      className="scroll-mt-24 overflow-hidden rounded-2xl border border-border bg-background shadow-sm"
+      className="scroll-mt-24 overflow-hidden rounded-2xl border border-border bg-background shadow-sm transition-shadow duration-300 hover:shadow-md"
+      data-hover-lift
     >
       <div
         className={cn(
@@ -20,7 +24,14 @@ export default function FeatureCard({ feature, index }: FeatureCardProps) {
           reversed && "lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1",
         )}
       >
-        <div className="relative flex flex-col justify-center border-b border-border p-8 md:p-10 lg:border-b-0 lg:border-r lg:p-12">
+        <AnimatedContent
+          distance={56}
+          direction="horizontal"
+          reverse={reversed}
+          duration={0.9}
+          delay={index * 0.05}
+          className="relative flex flex-col justify-center border-b border-border p-8 md:p-10 lg:border-b-0 lg:border-r lg:p-12"
+        >
           <span
             aria-hidden
             className="pointer-events-none absolute -right-2 top-2 select-none text-7xl font-bold leading-none tracking-tighter text-foreground/[0.04] md:text-8xl lg:right-4"
@@ -47,11 +58,18 @@ export default function FeatureCard({ feature, index }: FeatureCardProps) {
               </span>
             ))}
           </div>
-        </div>
+        </AnimatedContent>
 
-        <div className="flex items-center justify-center bg-[#14141a] p-6 md:p-10">
-          <feature.Illustration className="h-full w-full max-w-md" />
-        </div>
+        <Reveal
+          distance={40}
+          duration={0.85}
+          delay={0.1 + index * 0.05}
+          className="flex items-center justify-center overflow-hidden bg-[#14141a] p-6 md:p-10"
+        >
+          <Parallax speed={24 + index * 4} trigger={`#fitur-${feature.number}`}>
+            <feature.Illustration className="h-full w-full max-w-md" />
+          </Parallax>
+        </Reveal>
       </div>
     </article>
   )

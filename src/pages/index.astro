@@ -16,11 +16,13 @@ import Resources from "../components/landing/Resources.astro"
 import Faq from "../components/landing/Faq.astro"
 import Cta from "../components/landing/Cta"
 import Footer from "../components/landing/Footer.astro"
+import LandingMotion from "../components/LandingMotion"
 import { BRAND_FULL } from "../lib/brand"
 ---
 
 <Layout title={`${BRAND_FULL} — Platform Billing & Operasi ISP`}>
   <Header />
+  <LandingMotion client:load />
   <main>
     <Hero client:only="react" />
     <HowItWorks />

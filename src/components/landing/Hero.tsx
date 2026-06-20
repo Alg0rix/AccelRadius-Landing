@@ -1,8 +1,15 @@
+import { useRef } from "react"
+import { gsap } from "gsap"
+import { useGSAP } from "@gsap/react"
 import SplitText from "@/components/SplitText"
 import FadeContent from "@/components/FadeContent"
+import Parallax from "@/components/Parallax"
 import { CustomerIllustration } from "@/components/illustrations/AccelRadMocks"
 import { audiences } from "@/lib/features-data"
+import { prefersReducedMotion } from "@/lib/parallax"
 import { BRAND_ICON, BRAND_LOGO, BRAND_NAME, BRAND_TAGLINE } from "@/lib/brand"
+
+gsap.registerPlugin(useGSAP)
 
 const highlights = [
   { value: "9", label: "Modul terintegrasi" },
@@ -11,10 +18,43 @@ const highlights = [
 ]
 
 export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return
+
+      gsap.to(".hero-float", {
+        y: -10,
+        duration: 2.4,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+        stagger: 0.4,
+      })
+
+      gsap.to(".hero-glow", {
+        scale: 1.06,
+        duration: 4,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+        stagger: 0.8,
+      })
+    },
+    { scope: sectionRef },
+  )
+
   return (
-    <section className="mesh-hero relative overflow-hidden">
-      <div className="pointer-events-none absolute -right-32 top-20 size-[480px] rounded-full bg-brand-blue/10 blur-3xl" />
-      <div className="pointer-events-none absolute -left-20 bottom-0 size-[360px] rounded-full bg-brand-red/10 blur-3xl" />
+    <section ref={sectionRef} className="mesh-hero relative overflow-hidden">
+      <Parallax
+        speed={90}
+        className="hero-glow pointer-events-none absolute -right-32 top-20 size-[480px] rounded-full bg-brand-blue/10 blur-3xl"
+      />
+      <Parallax
+        speed={-70}
+        className="hero-glow pointer-events-none absolute -left-20 bottom-0 size-[360px] rounded-full bg-brand-red/10 blur-3xl"
+      />
 
       <div className="relative mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-2 lg:items-center lg:py-24">
         <div className="space-y-8">
@@ -28,9 +68,11 @@ export default function Hero() {
           </FadeContent>
 
           <div>
-            <p className="mb-4 text-sm font-semibold text-brand-blue">
-              Platform all-in-one untuk ISP Indonesia
-            </p>
+            <FadeContent delay={150} playOnMount>
+              <p className="mb-4 text-sm font-semibold text-brand-blue">
+                Platform all-in-one untuk ISP Indonesia
+              </p>
+            </FadeContent>
             <SplitText
               text="Satu platform untuk billing, jaringan, dan operasi ISP."
               tag="h1"
@@ -54,13 +96,12 @@ export default function Hero() {
 
           <FadeContent delay={450} playOnMount>
             <div className="flex flex-wrap gap-3">
-              {audiences.map((item) => (
-                <span
-                  key={item}
-                  className="rounded-full border border-border bg-background px-4 py-2 text-xs font-medium text-foreground/80"
-                >
-                  {item}
-                </span>
+              {audiences.map((item, i) => (
+                <FadeContent key={item} delay={500 + i * 80} playOnMount>
+                  <span className="rounded-full border border-border bg-background px-4 py-2 text-xs font-medium text-foreground/80 transition-colors hover:border-brand-blue/40 hover:bg-muted">
+                    {item}
+                  </span>
+                </FadeContent>
               ))}
             </div>
           </FadeContent>
@@ -79,37 +120,48 @@ export default function Hero() {
 
           <FadeContent delay={650} playOnMount>
             <div className="flex flex-wrap gap-6 pt-2">
-              {highlights.map((h) => (
-                <div key={h.label}>
-                  <p className="text-2xl font-bold text-foreground">{h.value}</p>
-                  <p className="text-xs text-muted-foreground">{h.label}</p>
-                </div>
+              {highlights.map((h, i) => (
+                <FadeContent key={h.label} delay={700 + i * 100} playOnMount>
+                  <div>
+                    <p className="text-2xl font-bold text-foreground">{h.value}</p>
+                    <p className="text-xs text-muted-foreground">{h.label}</p>
+                  </div>
+                </FadeContent>
               ))}
             </div>
           </FadeContent>
         </div>
 
         <FadeContent delay={400} duration={1200} playOnMount>
-          <div className="relative">
-            <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#14141a] shadow-2xl ring-1 ring-white/5">
+          <Parallax speed={56} className="relative">
+            <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#14141a] shadow-2xl ring-1 ring-white/5 transition-shadow duration-500 hover:shadow-[0_32px_80px_-20px_rgba(43,95,217,0.35)]">
               <CustomerIllustration className="w-full" />
             </div>
-            <div className="absolute -bottom-6 -left-4 rounded-2xl border bg-background p-4 shadow-lg md:-left-8">
+            <Parallax
+              speed={-36}
+              className="hero-float absolute -bottom-6 -left-4 rounded-2xl border bg-background p-4 shadow-lg md:-left-8"
+            >
               <img src={BRAND_LOGO} alt={BRAND_NAME} className="h-10 w-auto object-contain" />
-            </div>
-            <div className="absolute -right-2 top-8 rounded-xl border border-brand-red/30 bg-brand-red px-4 py-3 text-white shadow-lg md:-right-6">
+            </Parallax>
+            <Parallax
+              speed={44}
+              className="hero-float absolute -right-2 top-8 rounded-xl border border-brand-red/30 bg-brand-red px-4 py-3 text-white shadow-lg md:-right-6"
+            >
               <p className="text-[10px] font-bold uppercase tracking-wider opacity-80">
                 Pelanggan aktif
               </p>
               <p className="text-2xl font-bold">247</p>
-            </div>
-            <div className="absolute -left-2 top-1/3 rounded-xl border bg-background px-4 py-3 shadow-lg md:-left-6">
+            </Parallax>
+            <Parallax
+              speed={-28}
+              className="hero-float absolute -left-2 top-1/3 rounded-xl border bg-background px-4 py-3 shadow-lg md:-left-6"
+            >
               <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                 Tagihan bulan ini
               </p>
               <p className="text-lg font-bold text-brand-blue">Rp 48,5jt</p>
-            </div>
-          </div>
+            </Parallax>
+          </Parallax>
         </FadeContent>
       </div>
     </section>
