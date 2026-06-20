@@ -10,6 +10,24 @@ import { CloudTopologySvg, SelfHostedTopologySvg } from "./topology-svgs"
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin, useGSAP)
 
+function animateAlongPath(
+  target: Element | null,
+  path: SVGPathElement | null,
+  options: { duration: number; delay?: number; repeat?: number },
+) {
+  if (!target || !path) return
+  gsap.to(target, {
+    motionPath: {
+      path,
+      alignOrigin: [0.5, 0.5],
+    },
+    duration: options.duration,
+    delay: options.delay ?? 0,
+    repeat: options.repeat ?? -1,
+    ease: "none",
+  })
+}
+
 function ImpactList({
   items,
   variant,
@@ -53,7 +71,7 @@ export default function SelfHostTopology() {
       if (!root) return
 
       const all = root.querySelectorAll(
-        ".topo-panel, .topo-line, .topo-node, .topo-impact, .topo-flow-note, .topo-warning, .topo-warning-label, .topo-sync-badge, .topo-zone, .topo-badge, [data-topo-canvas]",
+        ".topo-intro, .topo-panel, .topo-line, .topo-node, .topo-impact, .topo-flow-note, .topo-warning, .topo-warning-label, .topo-sync-badge, .topo-zone, .topo-badge, [data-topo-canvas]",
       )
 
       if (prefersReducedMotion()) {
@@ -61,6 +79,7 @@ export default function SelfHostTopology() {
         return
       }
 
+      const intro = root.querySelector<HTMLElement>(".topo-intro")
       const panels = root.querySelectorAll<HTMLElement>(".topo-panel")
       const canvases = root.querySelectorAll<SVGElement>("[data-topo-canvas]")
       const lines = root.querySelectorAll<SVGPathElement>(".topo-line-draw")
@@ -72,6 +91,7 @@ export default function SelfHostTopology() {
         ".topo-badge, .topo-sync-badge, .topo-warning, .topo-warning-label",
       )
 
+      if (intro) gsap.set(intro, { autoAlpha: 0, y: 24 })
       gsap.set(panels, { autoAlpha: 0, y: 36 })
       gsap.set(canvases, { autoAlpha: 0, scale: 0.97 })
       gsap.set(nodes, { autoAlpha: 0, scale: 0.9, transformOrigin: "center center" })
@@ -93,7 +113,11 @@ export default function SelfHostTopology() {
         },
       })
 
-      tl.to(panels, { autoAlpha: 1, y: 0, duration: 0.65, stagger: 0.16, ease: "power3.out" })
+      if (intro) {
+        tl.to(intro, { autoAlpha: 1, y: 0, duration: 0.6, ease: "power3.out" })
+      }
+
+      tl.to(panels, { autoAlpha: 1, y: 0, duration: 0.65, stagger: 0.16, ease: "power3.out" }, intro ? "-=0.3" : 0)
         .to(canvases, { autoAlpha: 1, scale: 1, duration: 0.55, stagger: 0.12, ease: "power2.out" }, "-=0.4")
         .to(zones, { autoAlpha: 1, scale: 1, duration: 0.5, stagger: 0.08 }, "-=0.35")
         .to(
@@ -110,45 +134,29 @@ export default function SelfHostTopology() {
         .to(notes, { autoAlpha: 1, y: 0, duration: 0.4, stagger: 0.08 }, "-=0.2")
         .to(impacts, { autoAlpha: 1, x: 0, duration: 0.35, stagger: 0.06 }, "-=0.15")
 
-      const cloudPacket = root.querySelector(".topo-packet-cloud")
-      if (cloudPacket) {
-        gsap.to(cloudPacket, {
-          motionPath: {
-            path: "M 108 310 C 108 190 175 105 260 92",
-            align: "M 108 310 C 108 190 175 105 260 92",
-            alignOrigin: [0.5, 0.5],
-          },
-          duration: 4.2,
-          repeat: -1,
-          ease: "none",
-          delay: 1.4,
-        })
-      }
+      animateAlongPath(
+        root.querySelector(".topo-packet-cloud"),
+        root.querySelector<SVGPathElement>(".topo-motion-path-cloud"),
+        { duration: 4.2, delay: 1.4 },
+      )
 
-      const cloudPacket2 = root.querySelector(".topo-packet-cloud-2")
-      if (cloudPacket2) {
-        gsap.to(cloudPacket2, { x: -84, duration: 2.4, repeat: -1, ease: "power1.inOut", delay: 1 })
-      }
+      animateAlongPath(
+        root.querySelector(".topo-packet-cloud-2"),
+        root.querySelector<SVGPathElement>(".topo-motion-path-cloud-local"),
+        { duration: 2.4, delay: 1 },
+      )
 
-      const selfPacket = root.querySelector(".topo-packet-self")
-      if (selfPacket) {
-        gsap.to(selfPacket, {
-          motionPath: {
-            path: "M 382 310 L 318 310 L 260 310 L 260 272",
-            align: "M 382 310 L 318 310 L 260 310 L 260 272",
-            alignOrigin: [0.5, 0.5],
-          },
-          duration: 1.4,
-          repeat: -1,
-          ease: "none",
-          delay: 1,
-        })
-      }
+      animateAlongPath(
+        root.querySelector(".topo-packet-self"),
+        root.querySelector<SVGPathElement>(".topo-motion-path-self"),
+        { duration: 1.4, delay: 1 },
+      )
 
-      const selfPacket2 = root.querySelector(".topo-packet-self-2")
-      if (selfPacket2) {
-        gsap.to(selfPacket2, { x: 40, duration: 1, repeat: -1, yoyo: true, ease: "power1.inOut", delay: 0.6 })
-      }
+      animateAlongPath(
+        root.querySelector(".topo-packet-self-2"),
+        root.querySelector<SVGPathElement>(".topo-motion-path-self-team"),
+        { duration: 1, delay: 0.6 },
+      )
 
       gsap.to(root.querySelectorAll(".topo-line-sync, .topo-line-sync-rev"), {
         strokeOpacity: 0.4,
@@ -177,19 +185,13 @@ export default function SelfHostTopology() {
         ease: "sine.inOut",
         delay: 2,
       })
-
-      return () => {
-        ScrollTrigger.getAll().forEach((st) => {
-          if (st.trigger === root) st.kill()
-        })
-      }
     },
     { scope: rootRef },
   )
 
   return (
     <div ref={rootRef} className="mt-12 space-y-5">
-      <div data-animate="reveal" className="max-w-2xl">
+      <div className="topo-intro max-w-2xl">
         <p className="text-sm font-semibold text-brand-red">Perbandingan topologi</p>
         <h3 className="mt-1 text-2xl font-bold tracking-tight md:text-3xl">
           Dua cara ISP menjalankan billing & jaringan

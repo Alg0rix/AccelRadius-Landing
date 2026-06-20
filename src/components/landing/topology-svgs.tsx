@@ -235,7 +235,7 @@ export function CloudTopologySvg({ className }: SvgProps) {
       </g>
 
       <path
-        className="topo-line topo-line-draw"
+        className="topo-line topo-line-draw topo-motion-path-cloud"
         d="M 108 310 C 108 190 175 105 260 92"
         fill="none"
         stroke="#f59e0b"
@@ -253,7 +253,7 @@ export function CloudTopologySvg({ className }: SvgProps) {
         strokeDasharray="7 8"
       />
       <path
-        className="topo-line topo-line-draw"
+        className="topo-line topo-line-draw topo-motion-path-cloud-local"
         d="M 392 310 L 308 310"
         fill="none"
         stroke="rgba(255,255,255,0.2)"
@@ -430,7 +430,7 @@ export function SelfHostedTopologySvg({ className }: SvgProps) {
       </g>
 
       <path
-        className="topo-line topo-line-draw"
+        className="topo-line topo-line-draw topo-motion-path-self-team"
         d="M 138 188 L 178 188"
         fill="none"
         stroke="#5b8def"
@@ -455,7 +455,7 @@ export function SelfHostedTopologySvg({ className }: SvgProps) {
         markerEnd="url(#arrow-green)"
       />
       <path
-        className="topo-line topo-line-draw"
+        className="topo-line topo-line-draw topo-motion-path-self"
         d="M 382 310 L 318 310 L 260 310 L 260 272"
         fill="none"
         stroke="#34d399"
