@@ -17,6 +17,7 @@ import Faq from "../components/landing/Faq.astro"
 import Cta from "../components/landing/Cta"
 import Footer from "../components/landing/Footer.astro"
 import LandingMotion from "../components/LandingMotion"
+import AssistantChat from "../components/landing/AssistantChat"
 import { BRAND_FULL } from "../lib/brand"
 ---
 
@@ -40,4 +41,5 @@ import { BRAND_FULL } from "../lib/brand"
     <Cta client:visible />
   </main>
   <Footer />
+  <AssistantChat client:load />
 </Layout>
