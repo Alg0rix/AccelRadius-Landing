@@ -174,6 +174,18 @@
     @apply inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-background transition-all hover:bg-white/10;
   }
 
+  .floating-wa {
+    @apply fixed bottom-6 left-4 z-50 flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-all hover:scale-105 hover:bg-[#1ebe57] hover:shadow-xl sm:left-6;
+  }
+
+  .floating-wa-pulse {
+    @apply absolute inset-0 rounded-full bg-[#25D366] motion-safe:animate-ping opacity-30;
+  }
+
+  .floating-wa-tooltip {
+    @apply pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-2.5 py-1 text-xs font-medium text-background opacity-0 shadow-md transition-opacity group-hover:opacity-100;
+  }
+
   .ar-mock {
     @apply bg-[#14141a] text-white;
     font-family: system-ui, sans-serif;

@@ -191,7 +191,7 @@ export const systemRequirements = [
   },
   {
     title: "Spesifikasi minimum",
-    items: ["2 vCPU", "4 GB RAM", "40 GB disk", "Port 80/443 terbuka"],
+    items: ["2 vCPU", "4 GB RAM", "40 GB disk SSD", "Port 80/443 terbuka"],
   },
   {
     title: "Rekomendasi produksi",
@@ -200,6 +200,78 @@ export const systemRequirements = [
   {
     title: "Opsional",
     items: ["Domain & sertifikat TLS", "Gateway Tripay atau Duitku", "Akun WhatsApp Business"],
+  },
+]
+
+export const serverScalingGuide = [
+  {
+    scale: "Hingga ~200 pelanggan",
+    specs: "2 vCPU · 4 GB RAM · 40 GB SSD",
+    note: "Cocok untuk evaluasi, lab, atau ISP kecil",
+  },
+  {
+    scale: "200 – 500 pelanggan",
+    specs: "4 vCPU · 8 GB RAM · 80 GB SSD",
+    note: "Spesifikasi produksi standar",
+  },
+  {
+    scale: "500 – 1.000 pelanggan",
+    specs: "4–8 vCPU · 16 GB RAM · SSD 120 GB+",
+    note: "Pantau worker & antrian WhatsApp",
+  },
+  {
+    scale: "1.000+ pelanggan",
+    specs: "8+ vCPU · 16–32 GB RAM · SSD terpisah untuk DB",
+    note: "Pertimbangkan paket Enterprise & arsitektur multi-site",
+  },
+]
+
+export const networkPorts = [
+  { port: "80 / 443 (TCP)", purpose: "Dashboard admin, portal pelanggan, dan API — HTTPS disarankan" },
+  { port: "1812 / 1813 (UDP)", purpose: "RADIUS autentikasi & accounting, jika NAS mengarah ke server ini" },
+]
+
+export const installSteps = [
+  "Login ke server Linux (Ubuntu/Debian) dengan akses sudo",
+  "Jalankan installer satu baris — arsitektur CPU terdeteksi otomatis (amd64/arm64)",
+  "Installer mengunduh rilis terbaru dan menyiapkan layanan (API, worker, WhatsApp) via systemd",
+  "Buka dashboard di browser sesuai URL yang muncul di terminal",
+  "Lanjut konfigurasi awal: paket internet, gateway, profil RADIUS, template WA, portal",
+]
+
+export const postInstallChecklist = [
+  "Buat pengguna admin & atur role tim (sales, kasir, support, teknisi)",
+  "Definisikan paket internet & siklus tagihan",
+  "Hubungkan gateway Tripay atau Duitku",
+  "Konfigurasi profil RADIUS & NAS (MikroTik)",
+  "Setup akun WhatsApp & template notifikasi",
+  "Aktifkan domain + sertifikat TLS untuk portal pelanggan",
+  "Jadwalkan backup database",
+]
+
+export const teamRoles = [
+  { role: "Superadmin", desc: "Akses penuh — pengguna, lisensi, branding, audit log" },
+  { role: "Sales", desc: "Tambah pelanggan, paket, dan onboarding" },
+  { role: "Kasir", desc: "Catat pembayaran manual & verifikasi transaksi" },
+  { role: "Support", desc: "Tangani tiket & komunikasi pelanggan" },
+  { role: "Teknisi", desc: "Pantau sesi jaringan, isolir, dan profil bandwidth" },
+]
+
+export const licenseComparison = [
+  {
+    tier: "Evaluasi",
+    summary: "Gratis pasang di server Anda — semua 9 modul, cocok lab/staging",
+    limits: "Bukan lisensi produksi jangka panjang",
+  },
+  {
+    tier: "Profesional",
+    summary: "Lisensi produksi + update berkala + dukungan prioritas + bantuan setup awal",
+    limits: "Untuk ISP operasional skala menengah",
+  },
+  {
+    tier: "Enterprise",
+    summary: "Multi-site, SLA khusus, onboarding/migrasi data, integrasi custom",
+    limits: "Harga dan scope disesuaikan kebutuhan",
   },
 ]
 
@@ -248,6 +320,81 @@ export const faqItems = [
     question: "Kenapa harus install di server sendiri, bukan SaaS cloud?",
     answer:
       "Accel Radius dirancang self-hosted agar data pelanggan dan operasi billing–RADIUS tetap di infrastruktur ISP. Anda kontrol backup, keamanan, dan uptime sendiri; bisa evaluasi penuh di server lab sebelum komit lisensi produksi.",
+  },
+  {
+    question: "Berapa spesifikasi server untuk 500 pelanggan?",
+    answer:
+      "Untuk ~500 pelanggan, rekomendasi produksi: 4 vCPU, 8 GB RAM, SSD 80 GB+, Ubuntu/Debian, port 80/443 terbuka, dan backup database terjadwal. Skala di atas 1.000 pelanggan biasanya butuh resource lebih besar — konsultasikan paket Enterprise.",
+  },
+  {
+    question: "Port apa yang harus dibuka di firewall?",
+    answer:
+      "Minimum: TCP 80 dan 443 untuk dashboard admin, portal pelanggan, dan API. Jika RADIUS di server yang sama: UDP 1812 (auth) dan 1813 (accounting). Pastikan NAS/MikroTik bisa menjangkau server RADIUS Anda.",
+  },
+  {
+    question: "Apakah bisa dipasang di VPS?",
+    answer:
+      "Ya. Accel Radius cocok di VPS cloud (DigitalOcean, Vultr, IDCloudHost, dll.) atau dedicated server ISP. Yang penting: Linux Ubuntu/Debian, sudo, internet stabil, dan spesifikasi memenuhi minimum 2 vCPU / 4 GB RAM.",
+  },
+  {
+    question: "Bagaimana cara backup database?",
+    answer:
+      "Backup database adalah tanggung jawab operator. Jadwalkan dump/backup rutin sebelum update atau perubahan besar. Jalankan ulang installer yang sama untuk upgrade — selalu backup dulu. Tim Enterprise bisa bantu prosedur migrasi.",
+  },
+  {
+    question: "Apakah isolir pelanggan otomatis?",
+    answer:
+      "Ya. Tagihan dan kontrol akses terhubung — pelanggan menunggak bisa diisolir dari dashboard, dan sesi PPPoE/hotspot diputus lewat integrasi RADIUS. Tim teknisi memantau sesi aktif tanpa bolak-balik ke MikroTik manual.",
+  },
+  {
+    question: "Bisakah migrasi dari billing lama?",
+    answer:
+      "Modul pelanggan mendukung impor/ekspor massal. Untuk migrasi besar dari sistem lain, paket Enterprise menyertakan bantuan onboarding & migrasi data — hubungi tim sales untuk scope dan jadwal.",
+  },
+  {
+    question: "Role pengguna apa saja yang didukung?",
+    answer:
+      "Superadmin (akses penuh), Sales (onboarding pelanggan), Kasir (pembayaran), Support (tiket), dan Teknisi (jaringan & isolir). Semua role bekerja dari satu dashboard realtime.",
+  },
+  {
+    question: "Apakah perlu domain dan SSL?",
+    answer:
+      "Tidak wajib untuk evaluasi awal, tetapi sangat disarankan untuk produksi: domain kustom + sertifikat TLS agar portal pelanggan aman dan terpercaya. Konfigurasi dari panel admin setelah instalasi.",
+  },
+  {
+    question: "Bagaimana pasang versi rilis tertentu?",
+    answer:
+      'Set variabel ACCELRAD_RELEASE_BASE_URL ke URL rilis GitHub sebelum menjalankan installer, contoh: ACCELRAD_RELEASE_BASE_URL="https://github.com/Accel-Radius/radius/releases/download/v1.0.0" curl -fsSL .../install.sh | sudo bash. Detail di halaman Changelog.',
+  },
+  {
+    question: "Apakah mendukung server ARM?",
+    answer:
+      "Ya. Installer mendeteksi arsitektur CPU secara otomatis (amd64 dan arm64) lalu mengunduh paket rilis yang sesuai.",
+  },
+  {
+    question: "Bagaimana setup MikroTik dengan RADIUS?",
+    answer:
+      "Buat profil bandwidth & paket internet di dashboard, arahkan NAS MikroTik ke server RADIUS Accel Radius (UDP 1812/1813), lalu uji autentikasi PPPoE atau hotspot. Sesi aktif dan isolir dikelola dari modul Jaringan & RADIUS.",
+  },
+  {
+    question: "Apa beda paket Evaluasi dan Profesional?",
+    answer:
+      "Evaluasi: gratis pasang, semua modul, cocok lab/staging — bukan lisensi produksi jangka panjang. Profesional: lisensi produksi, update berkala, dukungan prioritas, bantuan konfigurasi awal, dan branding portal.",
+  },
+  {
+    question: "Bagaimana setup Tripay atau Duitku?",
+    answer:
+      "Daftar akun merchant di Tripay atau Duitku, lalu masukkan kredensial gateway di panel admin. Platform mendukung VA, QRIS, dan e-wallet dengan pencocokan transaksi otomatis ke tagihan pelanggan.",
+  },
+  {
+    question: "Apa yang dilakukan setelah instalasi selesai?",
+    answer:
+      "Buat admin & role tim, definisikan paket internet, hubungkan gateway pembayaran, konfigurasi RADIUS/NAS, setup WhatsApp, aktifkan TLS/domain, dan jadwalkan backup database sebelum go-live produksi.",
+  },
+  {
+    question: "Apakah Accel Radius sama dengan AccelLicense?",
+    answer:
+      "Tidak. Accel Radius adalah produk billing & operasi ISP yang di-install di server Anda. AccelLicense adalah server lisensi terpisah yang mengelola aktivasi lisensi produk — keduanya bekerja bersama untuk deployment produksi.",
   },
 ]
 

@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react"
-import { SALES_EMAIL, SUPPORT_EMAIL, WHATSAPP_URL } from "@/lib/brand"
+import { WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/brand"
 import { cn } from "@/lib/utils"
 
 const customerRanges = [
@@ -43,22 +43,16 @@ export default function ContactForm({ variant = "light" }: ContactFormProps) {
     ].join("\n")
   }
 
-  function handleEmailSubmit(e: FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    const subject = encodeURIComponent(`[Accel Radius] Permintaan dari ${isp || name}`)
-    const body = encodeURIComponent(buildBody())
-    window.location.href = `mailto:${SALES_EMAIL}?subject=${subject}&body=${body}`
-  }
-
-  function handleWhatsApp() {
     const text = encodeURIComponent(
-      `Halo tim Accel Radius,\n\nSaya ${name || "(nama)"} dari ${isp || "(ISP)"}.\nSkala: ${scale}\n\n${message || "Ingin konsultasi lisensi Accel Radius."}`,
+      `Halo tim Accel Radius,\n\n${buildBody()}`,
     )
     window.open(`${WHATSAPP_URL}?text=${text}`, "_blank", "noopener,noreferrer")
   }
 
   return (
-    <form onSubmit={handleEmailSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block space-y-1.5">
           <span className={labelClass}>Nama</span>
@@ -122,21 +116,9 @@ export default function ContactForm({ variant = "light" }: ContactFormProps) {
         />
       </label>
 
-      <div className="flex flex-col gap-3 pt-1 sm:flex-row">
-        <button type="submit" className="modern-btn-primary w-full justify-center sm:flex-1">
-          Kirim via email
-        </button>
-        <button
-          type="button"
-          onClick={handleWhatsApp}
-          className={cn(
-            "w-full justify-center rounded-full border px-6 py-3 text-sm font-semibold transition-all sm:flex-1",
-            isLight
-              ? "border-border bg-background hover:border-foreground hover:bg-muted"
-              : "modern-btn-ghost-on-dark",
-          )}
-        >
-          Chat WhatsApp
+      <div className="pt-1">
+        <button type="submit" className="modern-btn-primary w-full justify-center">
+          Kirim via WhatsApp
         </button>
       </div>
 
@@ -146,15 +128,17 @@ export default function ContactForm({ variant = "light" }: ContactFormProps) {
           isLight ? "text-muted-foreground" : "text-background/40",
         )}
       >
-        Atau email langsung ke{" "}
+        Atau hubungi langsung{" "}
         <a
-          href={`mailto:${SUPPORT_EMAIL}`}
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           className={cn(
             "underline",
             isLight ? "text-brand-blue hover:text-brand-blue/80" : "hover:text-background/60",
           )}
         >
-          {SUPPORT_EMAIL}
+          {WHATSAPP_DISPLAY}
         </a>
       </p>
     </form>

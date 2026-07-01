@@ -8,6 +8,7 @@ import {
   BRAND_TAGLINE,
   RELEASE_REPO,
   SUPPORT_EMAIL,
+  WHATSAPP_DISPLAY,
   WHATSAPP_URL,
 } from "@/lib/brand"
 
@@ -79,7 +80,7 @@ export default function Cta() {
                       rel="noopener noreferrer"
                       className="modern-btn-primary"
                     >
-                      WhatsApp
+                      WhatsApp {WHATSAPP_DISPLAY}
                       <span aria-hidden>↗</span>
                     </a>
                     <a href={`mailto:${SUPPORT_EMAIL}`} className="modern-btn-ghost">

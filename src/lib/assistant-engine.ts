@@ -105,16 +105,21 @@ function pickReply(entry: KnowledgeEntry): AssistantReply {
 
 const fallbackReplies: AssistantReply[] = [
   {
-    text: "Saya belum yakin memahami pertanyaan itu. Coba tanyakan dengan kata kunci seperti **install**, **harga**, **RADIUS**, **WhatsApp**, atau **lisensi**.",
-    suggestions: ["Cara install", "Fitur apa saja?", "Hubungi sales", "Syarat server"],
+    text: "Saya belum yakin memahami pertanyaan itu. Coba kata kunci seperti **spesifikasi server**, **install**, **port firewall**, **MikroTik**, **harga**, atau **isolir**.",
+    suggestions: ["Spesifikasi server", "Cara install", "Setup MikroTik", "Hubungi sales"],
   },
   {
     text: "Hmm, pertanyaan tersebut belum ada di basis pengetahuan saya. Berikut topik yang sering ditanyakan operator ISP:",
-    suggestions: ["Apa itu Accel Radius?", "Berapa harganya?", "Gateway pembayaran", "Portal pelanggan"],
+    suggestions: [
+      "500 pelanggan butuh server apa?",
+      "Port firewall",
+      "Beda Evaluasi vs Profesional?",
+      "Setelah instalasi apa saja?",
+    ],
   },
   {
-    text: "Maaf, saya tidak menemukan jawaban pasti. Anda bisa hubungi tim kami untuk pertanyaan spesifik, atau coba salah satu topik di bawah.",
-    suggestions: ["Dokumentasi", "Model lisensi", "Cara update", "Integrasi Tripay"],
+    text: "Maaf, saya tidak menemukan jawaban pasti. Hubungi tim kami untuk pertanyaan spesifik, atau coba salah satu topik di bawah.",
+    suggestions: ["Backup database", "Setup Tripay", "Migrasi data", "Dokumentasi"],
   },
 ]
 

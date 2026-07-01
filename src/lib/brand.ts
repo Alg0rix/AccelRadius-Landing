@@ -19,5 +19,6 @@ export const INSTALL_SCRIPT =
 
 export const SUPPORT_EMAIL = "support@accelradius.id"
 export const SALES_EMAIL = "sales@accelradius.id"
-export const WHATSAPP_NUMBER = "6281234567890"
+export const WHATSAPP_NUMBER = "6285888225942"
+export const WHATSAPP_DISPLAY = "+62 858-8822-5942"
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`
