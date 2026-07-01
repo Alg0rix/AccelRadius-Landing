@@ -175,7 +175,7 @@
   }
 
   .floating-wa {
-    @apply fixed bottom-6 left-4 z-50 flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-all hover:scale-105 hover:bg-[#1ebe57] hover:shadow-xl sm:left-6;
+    @apply fixed bottom-6 right-4 z-50 flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-all hover:scale-105 hover:bg-[#1ebe57] hover:shadow-xl sm:right-6;
   }
 
   .floating-wa-pulse {
