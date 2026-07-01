@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accel Radius Social Card</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+    :root {
+      --bg: #ffffff;
+      --text: #171717;
+      --text-muted: #525252;
+      --brand-blue: #2b5fd9;
+      --brand-red: #ff4d00;
+      --border: #e5e5e5;
+      --font: "Inter", system-ui, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .social-card {
+      width: 1200px;
+      height: 630px;
+      background: var(--bg);
+      position: relative;
+      display: flex;
+      align-items: stretch;
+      overflow: hidden;
+    }
+
+    .mesh {
+      position: absolute;
+      inset: 0;
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(at 88% 12%, rgba(43, 95, 217, 0.12) 0, transparent 45%),
+        radial-gradient(at 8% 78%, rgba(255, 77, 0, 0.1) 0, transparent 40%),
+        linear-gradient(to right, rgba(23, 23, 23, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(23, 23, 23, 0.03) 1px, transparent 1px);
+      background-size: auto, auto, 64px 64px, 64px 64px;
+    }
+
+    .content-left {
+      position: relative;
+      z-index: 2;
+      width: 54%;
+      padding: 72px 64px 72px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .content-right {
+      position: relative;
+      z-index: 2;
+      width: 46%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 56px 72px 56px 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 18px 10px 12px;
+      margin-bottom: 28px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      width: fit-content;
+    }
+
+    .badge img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+
+    .badge span {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .eyebrow {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--brand-blue);
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 54px;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      margin-bottom: 20px;
+      max-width: 11ch;
+    }
+
+    .subtitle {
+      font-size: 22px;
+      line-height: 1.45;
+      color: var(--text-muted);
+      max-width: 28ch;
+      margin-bottom: 28px;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .pill.accent {
+      color: var(--brand-blue);
+      border-color: rgba(43, 95, 217, 0.25);
+      background: rgba(43, 95, 217, 0.06);
+    }
+
+    .dashboard {
+      width: 100%;
+      max-width: 430px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow:
+        0 0 0 1px rgba(23, 23, 23, 0.03),
+        0 24px 60px -20px rgba(23, 23, 23, 0.18);
+      overflow: hidden;
+    }
+
+    .dashboard-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dashboard-title {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #15803d;
+      background: #f0fdf4;
+      border-radius: 999px;
+      padding: 6px 10px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      padding: 18px 22px 8px;
+    }
+
+    .stat {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 16px;
+      background: #fafafa;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .stat-value.blue {
+      color: var(--brand-blue);
+    }
+
+    .stat-value.red {
+      color: var(--brand-red);
+    }
+
+    .modules {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 10px 22px 22px;
+    }
+
+    .module {
+      border-radius: 14px;
+      padding: 12px 10px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text);
+      background: #f5f5f5;
+      border: 1px solid var(--border);
+    }
+
+    .module.active {
+      background: rgba(43, 95, 217, 0.08);
+      border-color: rgba(43, 95, 217, 0.2);
+      color: var(--brand-blue);
+    }
+
+    .domain {
+      position: absolute;
+      right: 72px;
+      bottom: 36px;
+      z-index: 3;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: -0.02em;
+    }
+  </style>
+</head>
+<body>
+  <div class="social-card">
+    <div class="mesh"></div>
+
+    <div class="content-left">
+      <div class="badge">
+        <img src="assets/images/accel-radius-logo.png" alt="Accel Radius" />
+        <span>Accel Radius · Billing & Operasi</span>
+      </div>
+
+      <p class="eyebrow">Platform all-in-one untuk ISP Indonesia</p>
+      <h1>Satu platform untuk billing, jaringan, dan operasi ISP.</h1>
+      <p class="subtitle">
+        Self-hosted. Pelanggan tanpa batas. Billing, RADIUS, WhatsApp, dan laporan dalam satu dashboard.
+      </p>
+
+      <div class="features">
+        <span class="pill accent">9 modul terintegrasi</span>
+        <span class="pill">Self-hosted</span>
+        <span class="pill">RADIUS + MikroTik</span>
+        <span class="pill">Tripay & Duitku</span>
+      </div>
+    </div>
+
+    <div class="content-right">
+      <div class="dashboard">
+        <div class="dashboard-header">
+          <div class="dashboard-title">Dashboard Operasional</div>
+          <div class="status"><span class="status-dot"></span> Live</div>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-label">Pelanggan aktif</div>
+            <div class="stat-value blue">428</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Pendapatan bulan ini</div>
+            <div class="stat-value">Rp 186jt</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Sesi PPPoE</div>
+            <div class="stat-value blue">312</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Tunggakan</div>
+            <div class="stat-value red">18</div>
+          </div>
+        </div>
+        <div class="modules">
+          <div class="module active">Tagihan</div>
+          <div class="module active">RADIUS</div>
+          <div class="module">WhatsApp</div>
+          <div class="module">Portal</div>
+          <div class="module">Tiket</div>
+          <div class="module">Laporan</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="domain">accel-radius.com</div>
+  </div>
+</body>
+</html>
