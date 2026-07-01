@@ -19,6 +19,7 @@ import {
   networkPorts,
   postInstallChecklist,
   pricingTiers,
+  pricingSetupDisclaimer,
   selfHostReasons,
   serverScalingGuide,
   systemRequirements,
@@ -226,9 +227,9 @@ export const knowledgeBase: KnowledgeEntry[] = [
     keywords: ["migrasi", "pindah", "import data", "billing lama", "excel", "csv", "data lama"],
     replies: [
       {
-        text: "Modul pelanggan mendukung **impor/ekspor massal** untuk onboarding cepat.\n\nUntuk migrasi besar dari sistem billing lain, paket **Enterprise** mencakup bantuan onboarding & migrasi data — tim kami bantu scope, jadwal, dan validasi data.",
+        text: "Modul pelanggan mendukung **impor/ekspor massal** untuk onboarding cepat.\n\nUntuk migrasi besar dari sistem billing lain, hubungi tim dukungan — kami bantu scope, jadwal, dan validasi data.",
         links: [{ label: "Hubungi sales", href: "#kontak" }],
-        suggestions: ["Paket Enterprise", "Impor pelanggan"],
+        suggestions: ["Berapa harganya?", "Impor pelanggan"],
       },
     ],
   },
@@ -430,7 +431,7 @@ export const knowledgeBase: KnowledgeEntry[] = [
       {
         text: `**Panduan spesifikasi per skala:**\n\n${scalingList}\n\n**Minimum absolut:** 2 vCPU, 4 GB RAM, 40 GB SSD, Ubuntu/Debian.\n**Produksi umum:** 4 vCPU, 8 GB RAM, SSD 80 GB+, backup terjadwal.`,
         links: [{ label: "Persyaratan", href: "#persyaratan" }],
-        suggestions: ["Paket Enterprise", "Port firewall"],
+        suggestions: ["Berapa harganya?", "Port firewall"],
       },
     ],
   },
@@ -492,9 +493,9 @@ export const knowledgeBase: KnowledgeEntry[] = [
     keywords: ["backup", "cadangan", "restore", "dump", "database", "pg_dump", "recovery"],
     replies: [
       {
-        text: "**Backup database** adalah tanggung jawab operator ISP.\n\n• Jadwalkan backup rutin (harian/mingguan)\n• **Selalu backup sebelum update** — jalankan ulang installer yang sama untuk upgrade\n• Simpan cadangan di lokasi terpisah dari server produksi\n\nPaket Enterprise bisa bantu prosedur migrasi & recovery.",
+        text: "**Backup database** adalah tanggung jawab operator ISP.\n\n• Jadwalkan backup rutin (harian/mingguan)\n• **Selalu backup sebelum update** — jalankan ulang installer yang sama untuk upgrade\n• Simpan cadangan di lokasi terpisah dari server produksi\n\nButuh bantuan migrasi atau recovery? Hubungi tim dukungan.",
         links: [{ label: "Changelog & upgrade", href: "/changelog" }],
-        suggestions: ["Cara update", "Paket Enterprise"],
+        suggestions: ["Cara update", "Hubungi sales"],
       },
     ],
   },
@@ -585,11 +586,12 @@ export const knowledgeBase: KnowledgeEntry[] = [
     keywords: [
       "harga",
       "biaya",
+      "setup",
       "lisensi",
       "paket",
       "berapa",
       "pricing",
-      "enterprise",
+      "pro",
       "profesional",
       "evaluasi",
       "gratis",
@@ -603,7 +605,7 @@ export const knowledgeBase: KnowledgeEntry[] = [
           { label: "Lihat harga", href: "#harga" },
           { label: "Minta penawaran", href: "#kontak" },
         ],
-        suggestions: ["Beda Evaluasi vs Profesional?", "Paket Enterprise", "Hubungi sales"],
+        suggestions: ["Beda Evaluasi vs PRO?", "Evaluasi gratis?", "Hubungi sales"],
       },
     ],
   },
@@ -611,14 +613,14 @@ export const knowledgeBase: KnowledgeEntry[] = [
     id: "license-tiers",
     keywords: [
       "evaluasi",
+      "pro",
       "profesional",
-      "enterprise",
       "beda paket",
       "perbedaan paket",
       "trial",
       "demo",
     ],
-    patterns: [/beda\s+(evaluasi|profesional|paket)/, /evaluasi\s+vs/],
+    patterns: [/beda\s+(evaluasi|pro|profesional|paket)/, /evaluasi\s+vs/],
     priority: 2,
     replies: [
       {
@@ -633,28 +635,27 @@ export const knowledgeBase: KnowledgeEntry[] = [
     keywords: ["evaluasi gratis", "coba gratis", "trial", "staging", "lab", "poc"],
     replies: [
       {
-        text: "**Evaluasi gratis:** pasang di server Anda dengan installer — semua 9 modul aktif, cocok untuk lab/staging/POC.\n\nBukan lisensi produksi jangka panjang. Setelah yakin, upgrade ke **Profesional** atau **Enterprise** untuk dukungan, update berkala, dan go-live resmi.",
+        text: `**Evaluasi gratis 30 hari:** pasang di server Anda dengan installer — semua 9 modul aktif, pelanggan tanpa batas, 1 server. Cocok untuk lab/staging/POC.\n\nBukan lisensi produksi jangka panjang. Setelah yakin, upgrade ke **PRO** (Rp 199.000/bulan, pelanggan tanpa batas). ${pricingSetupDisclaimer}.`,
         links: [{ label: "Pasang sekarang", href: "#install" }],
-        suggestions: ["Beda dengan Profesional?", "Spesifikasi server"],
+        suggestions: ["Beda dengan PRO?", "Spesifikasi server"],
       },
     ],
   },
   {
-    id: "enterprise",
+    id: "multi-server",
     keywords: [
-      "enterprise",
       "multi site",
       "multisite",
       "multi-tenant",
-      "sla",
-      "onboarding",
+      "beberapa server",
+      "server kedua",
       "skala besar",
       "operator besar",
     ],
     replies: [
       {
-        text: "**Paket Enterprise** untuk operator multi-site atau skala besar:\n\n• Multi-tenant & multi-site\n• SLA & channel dukungan khusus\n• Onboarding & migrasi data\n• Integrasi custom sesuai kebutuhan\n• Arsitektur server disesuaikan skala\n\nHarga kustom — hubungi tim sales untuk penawaran.",
-        links: [{ label: "Form kontak", href: "#kontak" }],
+        text: `Lisensi **PRO** berlaku per server (Rp 199.000/bulan), pelanggan tanpa batas. ${pricingSetupDisclaimer}.\n\nButuh beberapa server atau multi-site? Beli lisensi tambahan per server, atau hubungi tim untuk penawaran bundel.`,
+        links: [{ label: "Form kontak", href: "#kontak" }, { label: "Lihat harga", href: "#harga" }],
       },
     ],
   },
@@ -805,7 +806,7 @@ export const knowledgeBase: KnowledgeEntry[] = [
           { label: "Form kontak", href: "#kontak" },
           { label: `WhatsApp ${WHATSAPP_DISPLAY}`, href: WHATSAPP_URL, external: true },
         ],
-        suggestions: ["Spesifikasi server", "Paket Enterprise"],
+        suggestions: ["Spesifikasi server", "Berapa harganya?"],
       },
     ],
   },
@@ -828,7 +829,7 @@ export const knowledgeBase: KnowledgeEntry[] = [
     keywords: ["branding", "logo", "warna", "white label", "kustomisasi", "tampilan"],
     replies: [
       {
-        text: "Paket **Profesional** dan **Enterprise** mendukung **branding portal pelanggan** — sesuaikan tampilan portal agar selaras dengan brand ISP Anda. Konfigurasi dari modul Operasi & Administrasi.",
+        text: "Paket **PRO** mendukung **branding portal pelanggan** — sesuaikan tampilan portal agar selaras dengan brand ISP Anda. Konfigurasi dari modul Operasi & Administrasi.",
         links: [{ label: "Paket harga", href: "#harga" }],
       },
     ],

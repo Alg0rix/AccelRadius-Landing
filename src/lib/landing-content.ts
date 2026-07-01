@@ -68,50 +68,49 @@ export const testimonials = [
   },
 ]
 
+export const pricingSetupDisclaimer = "*Belum termasuk biaya setup"
+
 export const pricingTiers = [
   {
     name: "Evaluasi",
-    price: "Gratis pasang",
-    description: "Coba di server Anda sendiri sebelum komit lisensi produksi.",
+    price: "Gratis",
+    priceNote: "30 hari · 1 server · pelanggan tanpa batas",
+    description: "Coba semua modul di server Anda sebelum komit lisensi produksi.",
     features: [
       "Installer & dashboard lengkap",
       "Semua 9 modul terintegrasi",
-      "Cocok untuk lab & staging",
-      "Dukungan email standar",
+      "Pelanggan tanpa batas selama evaluasi",
+      "Cocok untuk lab, staging, & POC",
+      "Dukungan email (jam kerja)",
     ],
     cta: "Pasang sekarang",
     ctaHref: "#install",
     highlighted: false,
   },
   {
-    name: "Profesional",
-    price: "Hubungi kami",
-    description: "Lisensi produksi untuk ISP yang sudah berjalan dan butuh stabilitas.",
+    name: "PRO",
+    price: "Rp 199.000",
+    priceNote: "/bulan · 1 server · pelanggan tanpa batas",
+    annualPrice: "Rp 1.990.000/tahun (hemat 2 bulan)",
+    pricingDisclaimer: pricingSetupDisclaimer,
+    description: "Lisensi produksi untuk ISP yang sudah go-live dan butuh update serta dukungan.",
     features: [
-      "Lisensi produksi & update berkala",
-      "Dukungan prioritas",
-      "Bantuan konfigurasi awal",
+      "Pelanggan tanpa batas",
+      "Semua 9 modul terintegrasi",
+      "Update berkala & patch keamanan",
+      "Dukungan prioritas (email + WhatsApp)",
+      "Bantuan setup awal",
       "Branding portal pelanggan",
     ],
-    cta: "Minta penawaran",
+    cta: "Mulai berlangganan",
     ctaHref: "#kontak",
     highlighted: true,
   },
-  {
-    name: "Enterprise",
-    price: "Kustom",
-    description: "Untuk operator multi-site atau kebutuhan SLA dan onboarding khusus.",
-    features: [
-      "Skala besar & multi-tenant",
-      "SLA & channel dukungan khusus",
-      "Onboarding & migrasi data",
-      "Kebutuhan integrasi kustom",
-    ],
-    cta: "Hubungi sales",
-    ctaHref: "#kontak",
-    highlighted: false,
-  },
 ]
+
+/** Ringkasan untuk kalkulator & asisten — bandingkan dengan SaaS per-pelanggan */
+export const pricingComparisonNote =
+  `Lisensi flat per server — tanpa batas pelanggan, tanpa biaya per-pelanggan. ${pricingSetupDisclaimer}. Biaya VPS/server ditanggung ISP sendiri.`
 
 export const selfHostReasons = [
   {
@@ -222,7 +221,7 @@ export const serverScalingGuide = [
   {
     scale: "1.000+ pelanggan",
     specs: "8+ vCPU · 16–32 GB RAM · SSD terpisah untuk DB",
-    note: "Pertimbangkan paket Enterprise & arsitektur multi-site",
+    note: "Naikkan spesifikasi server & backup — hubungi tim jika butuh arsitektur multi-site",
   },
 ]
 
@@ -260,18 +259,13 @@ export const teamRoles = [
 export const licenseComparison = [
   {
     tier: "Evaluasi",
-    summary: "Gratis pasang di server Anda — semua 9 modul, cocok lab/staging",
+    summary: "Gratis 30 hari — semua 9 modul, pelanggan tanpa batas, 1 server",
     limits: "Bukan lisensi produksi jangka panjang",
   },
   {
-    tier: "Profesional",
-    summary: "Lisensi produksi + update berkala + dukungan prioritas + bantuan setup awal",
-    limits: "Untuk ISP operasional skala menengah",
-  },
-  {
-    tier: "Enterprise",
-    summary: "Multi-site, SLA khusus, onboarding/migrasi data, integrasi custom",
-    limits: "Harga dan scope disesuaikan kebutuhan",
+    tier: "PRO",
+    summary: "Rp 199.000/bulan — pelanggan tanpa batas, update, dukungan prioritas, branding portal",
+    limits: "1 server · tahunan Rp 1.990.000 (hemat 2 bulan) · belum termasuk biaya setup",
   },
 ]
 
@@ -312,9 +306,14 @@ export const faqItems = [
       "Ya. Portal klien memungkinkan pelanggan cek tagihan, bayar online, dan buat tiket dukungan dari perangkat mobile maupun desktop.",
   },
   {
+    question: "Berapa harganya?",
+    answer:
+      "Evaluasi gratis 30 hari. PRO Rp 199.000/bulan atau Rp 1.990.000/tahun (hemat 2 bulan). Satu lisensi per server, pelanggan tanpa batas. Belum termasuk biaya setup. Biaya VPS/server ditanggung ISP sendiri.",
+  },
+  {
     question: "Bagaimana model lisensi dan dukungan?",
     answer:
-      "Evaluasi gratis via installer di server Anda. Untuk produksi, lisensi Profesional dan Enterprise tersedia dengan dukungan dan update — hubungi tim kami untuk penawaran.",
+      "Evaluasi gratis 30 hari untuk uji di server Anda. PRO Rp 199.000/bulan (atau Rp 1.990.000/tahun) untuk produksi — pelanggan tanpa batas, update berkala, dan dukungan prioritas. Belum termasuk biaya setup. Butuh lebih dari satu server? Hubungi tim untuk lisensi tambahan.",
   },
   {
     question: "Kenapa harus install di server sendiri, bukan SaaS cloud?",
@@ -324,7 +323,7 @@ export const faqItems = [
   {
     question: "Berapa spesifikasi server untuk 500 pelanggan?",
     answer:
-      "Untuk ~500 pelanggan, rekomendasi produksi: 4 vCPU, 8 GB RAM, SSD 80 GB+, Ubuntu/Debian, port 80/443 terbuka, dan backup database terjadwal. Skala di atas 1.000 pelanggan biasanya butuh resource lebih besar — konsultasikan paket Enterprise.",
+      "Untuk ~500 pelanggan, rekomendasi produksi: 4 vCPU, 8 GB RAM, SSD 80 GB+, Ubuntu/Debian, port 80/443 terbuka, dan backup database terjadwal. Skala di atas 1.000 pelanggan biasanya butuh resource lebih besar — naikkan spesifikasi server sesuai panduan skala.",
   },
   {
     question: "Port apa yang harus dibuka di firewall?",
@@ -339,7 +338,7 @@ export const faqItems = [
   {
     question: "Bagaimana cara backup database?",
     answer:
-      "Backup database adalah tanggung jawab operator. Jadwalkan dump/backup rutin sebelum update atau perubahan besar. Jalankan ulang installer yang sama untuk upgrade — selalu backup dulu. Tim Enterprise bisa bantu prosedur migrasi.",
+      "Backup database adalah tanggung jawab operator. Jadwalkan dump/backup rutin sebelum update atau perubahan besar. Jalankan ulang installer yang sama untuk upgrade — selalu backup dulu. Butuh bantuan migrasi? Hubungi tim dukungan.",
   },
   {
     question: "Apakah isolir pelanggan otomatis?",
@@ -349,7 +348,7 @@ export const faqItems = [
   {
     question: "Bisakah migrasi dari billing lama?",
     answer:
-      "Modul pelanggan mendukung impor/ekspor massal. Untuk migrasi besar dari sistem lain, paket Enterprise menyertakan bantuan onboarding & migrasi data — hubungi tim sales untuk scope dan jadwal.",
+      "Modul pelanggan mendukung impor/ekspor massal. Untuk migrasi besar dari sistem lain, hubungi tim dukungan — kami bantu scope dan jadwal sesuai kebutuhan.",
   },
   {
     question: "Role pengguna apa saja yang didukung?",
@@ -377,9 +376,9 @@ export const faqItems = [
       "Buat profil bandwidth & paket internet di dashboard, arahkan NAS MikroTik ke server RADIUS Accel Radius (UDP 1812/1813), lalu uji autentikasi PPPoE atau hotspot. Sesi aktif dan isolir dikelola dari modul Jaringan & RADIUS.",
   },
   {
-    question: "Apa beda paket Evaluasi dan Profesional?",
+    question: "Apa beda paket Evaluasi dan PRO?",
     answer:
-      "Evaluasi: gratis pasang, semua modul, cocok lab/staging — bukan lisensi produksi jangka panjang. Profesional: lisensi produksi, update berkala, dukungan prioritas, bantuan konfigurasi awal, dan branding portal.",
+      "Evaluasi: gratis 30 hari, semua modul, pelanggan tanpa batas — cocok lab/staging/POC. PRO: Rp 199.000/bulan, lisensi produksi, pelanggan tanpa batas, update berkala, dukungan prioritas, branding portal, dan bantuan setup awal. Belum termasuk biaya setup. Bayar tahunan Rp 1.990.000 menghemat 2 bulan.",
   },
   {
     question: "Bagaimana setup Tripay atau Duitku?",

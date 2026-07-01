@@ -1,5 +1,5 @@
 ---
-import { pricingTiers } from "../../lib/landing-content"
+import { pricingComparisonNote, pricingTiers } from "../../lib/landing-content"
 ---
 
 <section id="harga" class="scroll-mt-20 border-y border-border bg-muted/30 py-16 md:py-20">
@@ -8,12 +8,12 @@ import { pricingTiers } from "../../lib/landing-content"
       <p class="mb-2 text-sm font-semibold text-brand-blue">Lisensi</p>
       <h2 class="text-3xl font-bold tracking-tight md:text-4xl">Pilih paket yang sesuai</h2>
       <p class="mt-3 text-muted-foreground">
-        Mulai evaluasi di server Anda. Untuk produksi dan skala enterprise, tim kami
-        siap membantu penawaran dan onboarding.
+        Lisensi flat per server — tanpa biaya per-pelanggan. Mulai evaluasi gratis,
+        lalu pilih paket produksi sesuai skala ISP Anda.
       </p>
     </div>
 
-    <div data-stagger class="grid gap-4 lg:grid-cols-3">
+    <div data-stagger class="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
       {
         pricingTiers.map((tier) => (
           <article
@@ -33,6 +33,15 @@ import { pricingTiers } from "../../lib/landing-content"
             )}
             <h3 class="text-xl font-bold tracking-tight">{tier.name}</h3>
             <p class="mt-2 text-2xl font-bold">{tier.price}</p>
+            {"priceNote" in tier && tier.priceNote && (
+              <p class="mt-1 text-sm font-medium text-muted-foreground">{tier.priceNote}</p>
+            )}
+            {"annualPrice" in tier && tier.annualPrice && (
+              <p class="mt-1 text-xs text-brand-blue">{tier.annualPrice}</p>
+            )}
+            {"pricingDisclaimer" in tier && tier.pricingDisclaimer && (
+              <p class="mt-1 text-xs text-muted-foreground">{tier.pricingDisclaimer}</p>
+            )}
             <p class="mt-2 text-sm text-muted-foreground">{tier.description}</p>
             <ul class="mt-6 flex-1 space-y-2.5">
               {
@@ -57,5 +66,9 @@ import { pricingTiers } from "../../lib/landing-content"
         ))
       }
     </div>
+
+    <p data-animate="reveal" class="mt-8 max-w-3xl text-sm text-muted-foreground">
+      {pricingComparisonNote}
+    </p>
   </div>
 </section>

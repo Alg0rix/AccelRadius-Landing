@@ -113,7 +113,7 @@ const fallbackReplies: AssistantReply[] = [
     suggestions: [
       "500 pelanggan butuh server apa?",
       "Port firewall",
-      "Beda Evaluasi vs Profesional?",
+      "Beda Evaluasi vs PRO?",
       "Setelah instalasi apa saja?",
     ],
   },
