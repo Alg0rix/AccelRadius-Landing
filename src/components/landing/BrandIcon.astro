@@ -1,0 +1,34 @@
+---
+import { BRAND_ICON, BRAND_NAME } from "../../lib/brand"
+
+interface Props {
+  class?: string
+  sizes?: string
+  width?: number
+  height?: number
+}
+
+const {
+  class: className = "size-8 object-contain",
+  sizes = "40px",
+  width = 40,
+  height = 40,
+} = Astro.props
+
+const iconWebp = BRAND_ICON.replace(/\.png$/, ".webp")
+---
+
+<picture>
+  <source srcset={`${iconWebp} 512w, /logo192.webp 192w`} sizes={sizes} type="image/webp" />
+  <img
+    src={BRAND_ICON}
+    srcset={`${BRAND_ICON} 512w, /logo192.png 192w`}
+    sizes={sizes}
+    width={width}
+    height={height}
+    alt={`Logo ${BRAND_NAME}`}
+    class={className}
+    loading="lazy"
+    decoding="async"
+  />
+</picture>

@@ -1,7 +1,7 @@
 ---
+import BrandIcon from "./BrandIcon.astro"
 import {
   BRAND_FULL,
-  BRAND_ICON,
   BRAND_NAME,
   RELEASE_REPO,
   RELEASES_URL,
@@ -26,10 +26,11 @@ const legal = [
   <div class="mx-auto max-w-7xl px-6 py-14">
     <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
       <div class="flex items-start gap-4 lg:col-span-1">
-        <img
-          src={BRAND_ICON}
-          alt={BRAND_NAME}
+        <BrandIcon
           class="size-10 object-contain brightness-0 invert"
+          width={40}
+          height={40}
+          sizes="40px"
         />
         <div>
           <p class="font-bold tracking-tight">{BRAND_FULL}</p>

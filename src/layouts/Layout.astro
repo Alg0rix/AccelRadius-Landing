@@ -3,6 +3,7 @@ import "../styles/global.css"
 import FloatingWhatsApp from "../components/landing/FloatingWhatsApp.astro"
 import { BRAND_NAME, RELEASE_REPO, SITE_URL } from "../lib/brand"
 import { buildSeo } from "../lib/seo"
+import { softwareApplicationSchema } from "../lib/schema"
 
 interface Props {
   title?: string
@@ -11,6 +12,8 @@ interface Props {
   ogImage?: string
   twitterImage?: string
   type?: "website" | "article"
+  jsonLd?: Record<string, unknown>[]
+  robots?: string
 }
 
 const seo = buildSeo({
@@ -22,22 +25,11 @@ const seo = buildSeo({
   type: Astro.props.type,
 })
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: BRAND_NAME,
-  applicationCategory: "BusinessApplication",
-  operatingSystem: "Linux",
-  description: seo.description,
-  url: SITE_URL,
-  downloadUrl: RELEASE_REPO,
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "IDR",
-    description: "Evaluasi gratis via installer. Lisensi produksi hubungi tim sales.",
-  },
-}
+const robots = Astro.props.robots ?? "index, follow"
+const jsonLdGraph = [
+  softwareApplicationSchema(seo.description),
+  ...(Astro.props.jsonLd ?? []),
+]
 ---
 
 <!doctype html>
@@ -46,6 +38,7 @@ const jsonLd = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={seo.description} />
+    <meta name="robots" content={robots} />
     <meta name="theme-color" content="#2B5FD9" />
     <link rel="canonical" href={seo.canonicalUrl} />
     <link rel="alternate" hreflang={seo.hreflang} href={seo.canonicalUrl} />
@@ -73,7 +66,7 @@ const jsonLd = {
     <meta name="twitter:image" content={seo.twitterImage} />
     <meta name="twitter:image:alt" content={seo.ogImageAlt} />
 
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLdGraph)} />
   </head>
   <body class="antialiased">
     <slot />

@@ -15,9 +15,25 @@ import { BRAND_FULL, INSTALL_SCRIPT, RELEASES_URL } from "../lib/brand"
     <p class="mb-2 text-sm font-semibold text-brand-blue">Pembaruan</p>
     <h1 class="text-3xl font-bold tracking-tight md:text-4xl">Changelog & upgrade</h1>
     <p class="mt-4 text-muted-foreground">
-      Catatan rilis lengkap tersedia di GitHub. Untuk memperbarui instalasi yang sudah
-      ada, jalankan ulang installer setelah mencadangkan database.
+      Catatan rilis lengkap tersedia di GitHub. Halaman ini menjelaskan kebijakan
+      pembaruan, prosedur upgrade aman, dan cara memasang versi tertentu untuk
+      deployment produksi ISP.
     </p>
+
+    <section class="mt-8 space-y-4 text-sm leading-relaxed text-muted-foreground">
+      <h2 class="text-lg font-bold text-foreground">Kebijakan pembaruan</h2>
+      <p>
+        Rilis baru mencakup perbaikan bug, patch keamanan, dan fitur operasional ISP.
+        Lisensi PRO mencakup akses ke pembaruan berkala. Selalu baca catatan rilis di
+        GitHub sebelum upgrade produksi — terutama jika ada perubahan skema database
+        atau migrasi konfigurasi RADIUS.
+      </p>
+      <p>
+        Untuk lingkungan staging, uji upgrade dulu dengan backup database. Baru terapkan
+        ke server produksi di jadwal maintenance yang dikomunikasikan ke pelanggan jika
+        downtime diperlukan.
+      </p>
+    </section>
 
     <section class="mt-10 space-y-6">
       <div class="rounded-2xl border border-border bg-background p-6">

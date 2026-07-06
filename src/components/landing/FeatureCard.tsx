@@ -7,9 +7,15 @@ import { cn } from "@/lib/utils"
 interface FeatureCardProps {
   feature: FeatureItem
   index: number
+  /** Differentiate heading text when an index list shares the same feature names. */
+  detailSuffix?: string
 }
 
-export default function FeatureCard({ feature, index }: FeatureCardProps) {
+export default function FeatureCard({
+  feature,
+  index,
+  detailSuffix = " — pratinjau modul",
+}: FeatureCardProps) {
   const reversed = index % 2 === 1
 
   return (
@@ -44,6 +50,7 @@ export default function FeatureCard({ feature, index }: FeatureCardProps) {
           </p>
           <h3 className="mt-3 text-2xl font-bold tracking-tight md:text-3xl">
             {feature.title}
+            {detailSuffix}
           </h3>
           <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted-foreground md:text-base">
             {feature.description}

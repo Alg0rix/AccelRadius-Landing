@@ -1,0 +1,96 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Header from "../components/landing/Header.astro"
+import Footer from "../components/landing/Footer.astro"
+import PageHeader from "../components/landing/PageHeader.astro"
+import Breadcrumbs from "../components/landing/Breadcrumbs.astro"
+import Cta from "../components/landing/Cta"
+import LandingMotion from "../components/LandingMotion"
+import {
+  BRAND_FULL,
+  RELEASE_REPO,
+  SALES_EMAIL,
+  SUPPORT_EMAIL,
+  WHATSAPP_DISPLAY,
+  WHATSAPP_URL,
+} from "../lib/brand"
+import { breadcrumbSchema, contactPointSchema } from "../lib/schema"
+---
+
+<Layout
+  title={`Kontak — ${BRAND_FULL}`}
+  description="Hubungi tim Accel Radius untuk evaluasi, lisensi produksi, dukungan teknis, dan konsultasi implementasi billing ISP."
+  canonicalPath="/kontak"
+  jsonLd={[
+    contactPointSchema(),
+    breadcrumbSchema([
+      { name: "Beranda", path: "/" },
+      { name: "Kontak", path: "/kontak" },
+    ]),
+  ]}
+>
+  <Header />
+  <LandingMotion client:load />
+  <main>
+    <Breadcrumbs
+      items={[
+        { label: "Beranda", href: "/" },
+        { label: "Kontak" },
+      ]}
+    />
+    <PageHeader
+      eyebrow="Hubungi kami"
+      title="Kontak tim Accel Radius"
+      description="Evaluasi installer, penawaran lisensi PRO, bantuan migrasi data, dan dukungan teknis untuk operator ISP di Indonesia."
+    />
+
+    <section class="mx-auto max-w-3xl space-y-8 px-6 pb-12">
+      <div class="grid gap-4 sm:grid-cols-2">
+        <article class="rounded-2xl border border-border bg-background p-6">
+          <h2 class="text-lg font-bold">Dukungan teknis</h2>
+          <p class="mt-2 text-sm text-muted-foreground">Instalasi, upgrade, troubleshooting integrasi.</p>
+          <a
+            href={`mailto:${SUPPORT_EMAIL}`}
+            class="mt-4 inline-block text-sm font-semibold text-brand-blue hover:underline"
+          >
+            {SUPPORT_EMAIL}
+          </a>
+        </article>
+        <article class="rounded-2xl border border-border bg-background p-6">
+          <h2 class="text-lg font-bold">Penjualan &amp; lisensi</h2>
+          <p class="mt-2 text-sm text-muted-foreground">Penawaran PRO, lisensi multi-server, onboarding.</p>
+          <a
+            href={`mailto:${SALES_EMAIL}`}
+            class="mt-4 inline-block text-sm font-semibold text-brand-blue hover:underline"
+          >
+            {SALES_EMAIL}
+          </a>
+        </article>
+        <article class="rounded-2xl border border-border bg-background p-6 sm:col-span-2">
+          <h2 class="text-lg font-bold">WhatsApp</h2>
+          <p class="mt-2 text-sm text-muted-foreground">
+            Konsultasi cepat untuk evaluasi dan implementasi di server Anda.
+          </p>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-4 inline-block text-sm font-semibold text-brand-blue hover:underline"
+          >
+            {WHATSAPP_DISPLAY}
+          </a>
+        </article>
+      </div>
+
+      <p class="text-sm text-muted-foreground">
+        Repositori installer dan dokumentasi:{" "}
+        <a href={RELEASE_REPO} target="_blank" rel="noopener noreferrer" class="text-brand-blue hover:underline">
+          GitHub Accel Radius
+        </a>
+      </p>
+    </section>
+
+    <Cta client:visible />
+  </main>
+  <Footer />
+</Layout>

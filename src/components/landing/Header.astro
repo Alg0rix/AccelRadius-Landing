@@ -1,12 +1,13 @@
 ---
-import { BRAND_ICON, BRAND_NAME, BRAND_TAGLINE } from "../../lib/brand"
+import BrandIcon from "./BrandIcon.astro"
+import { BRAND_NAME, BRAND_TAGLINE } from "../../lib/brand"
 import { mainNav } from "../../lib/nav"
 ---
 
 <header class="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
   <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3">
     <a href="/" class="flex items-center gap-2.5">
-      <img src={BRAND_ICON} alt={BRAND_NAME} class="size-8 object-contain" />
+      <BrandIcon class="size-8 object-contain" width={32} height={32} sizes="32px" />
       <div class="hidden sm:block">
         <p class="text-[10px] font-semibold text-brand-red">{BRAND_TAGLINE}</p>
         <p class="text-sm font-bold tracking-tight">{BRAND_NAME}</p>

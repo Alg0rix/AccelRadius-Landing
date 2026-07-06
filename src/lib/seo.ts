@@ -17,8 +17,16 @@ export interface SeoInput {
   type?: "website" | "article"
 }
 
+/** Canonical paths use trailing slashes (except homepage) to match served URLs. */
+export function normalizeCanonicalPath(path: string) {
+  if (!path || path === "/") return "/"
+  const withLeading = path.startsWith("/") ? path : `/${path}`
+  return withLeading.endsWith("/") ? withLeading : `${withLeading}/`
+}
+
 export function absoluteUrl(path: string) {
-  return new URL(path, SITE_URL).toString()
+  const normalized = normalizeCanonicalPath(path)
+  return new URL(normalized, SITE_URL).toString()
 }
 
 export const DEFAULT_TITLE = `${BRAND_FULL} — Platform Billing & Operasi ISP Indonesia`

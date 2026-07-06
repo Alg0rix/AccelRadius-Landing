@@ -6,67 +6,117 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://accel-radius.com/fitur</loc>
+    <loc>https://accel-radius.com/fitur/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://accel-radius.com/harga</loc>
+    <loc>https://accel-radius.com/fitur/pelanggan/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://accel-radius.com/fitur/tagihan/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://accel-radius.com/fitur/pembayaran/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://accel-radius.com/fitur/jaringan/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://accel-radius.com/fitur/whatsapp/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://accel-radius.com/fitur/tiket/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://accel-radius.com/fitur/laporan/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://accel-radius.com/fitur/portal/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://accel-radius.com/fitur/admin/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://accel-radius.com/harga/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://accel-radius.com/blog</loc>
+    <loc>https://accel-radius.com/blog/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://accel-radius.com/blog/cara-mengelola-billing-isp</loc>
+    <loc>https://accel-radius.com/blog/cara-mengelola-billing-isp/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://accel-radius.com/blog/cara-setup-radius-mikrotik</loc>
+    <loc>https://accel-radius.com/blog/cara-setup-radius-mikrotik/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://accel-radius.com/blog/tips-mengurangi-tunggakan-pelanggan</loc>
+    <loc>https://accel-radius.com/blog/tips-mengurangi-tunggakan-pelanggan/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://accel-radius.com/blog/migrasi-spreadsheet-ke-sistem-billing</loc>
+    <loc>https://accel-radius.com/blog/migrasi-spreadsheet-ke-sistem-billing/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://accel-radius.com/blog/self-hosted-vs-saas-billing-isp</loc>
+    <loc>https://accel-radius.com/blog/self-hosted-vs-saas-billing-isp/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://accel-radius.com/dokumentasi</loc>
+    <loc>https://accel-radius.com/dokumentasi/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://accel-radius.com/tentang-kami</loc>
+    <loc>https://accel-radius.com/tentang-kami/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://accel-radius.com/changelog</loc>
+    <loc>https://accel-radius.com/kontak/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://accel-radius.com/changelog/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://accel-radius.com/privacy</loc>
+    <loc>https://accel-radius.com/privacy/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://accel-radius.com/terms</loc>
+    <loc>https://accel-radius.com/terms/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

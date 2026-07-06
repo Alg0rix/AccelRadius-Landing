@@ -1,0 +1,91 @@
+---
+import Layout from "../../layouts/Layout.astro"
+import Header from "../../components/landing/Header.astro"
+import Footer from "../../components/landing/Footer.astro"
+import Breadcrumbs from "../../components/landing/Breadcrumbs.astro"
+import { BRAND_FULL } from "../../lib/brand"
+import { featuresContent } from "../../lib/features-content"
+import { featurePages, getFeaturePage } from "../../lib/feature-pages"
+import { breadcrumbSchema } from "../../lib/schema"
+
+export function getStaticPaths() {
+  return featurePages.map((page) => ({ params: { slug: page.slug } }))
+}
+
+const { slug } = Astro.params
+const data = getFeaturePage(slug!)
+
+if (!data) {
+  return Astro.redirect("/fitur/")
+}
+
+const { feature, page } = data
+const related = page.relatedSlugs
+  .map((s) => featurePages.find((p) => p.slug === s))
+  .filter(Boolean)
+---
+
+<Layout
+  title={`${feature.title} — Fitur ${BRAND_FULL}`}
+  description={page.metaDescription}
+  canonicalPath={`/fitur/${page.slug}`}
+  jsonLd={[
+    breadcrumbSchema([
+      { name: "Beranda", path: "/" },
+      { name: "Fitur", path: "/fitur" },
+      { name: feature.title, path: `/fitur/${page.slug}` },
+    ]),
+  ]}
+>
+  <Header />
+  <main>
+    <Breadcrumbs
+      items={[
+        { label: "Beranda", href: "/" },
+        { label: "Fitur", href: "/fitur/" },
+        { label: feature.title },
+      ]}
+    />
+
+    <article class="mx-auto max-w-3xl px-6 py-16 md:py-20">
+      <p class="text-sm font-semibold text-brand-blue">Modul {feature.number}</p>
+      <h1 class="mt-2 text-3xl font-bold tracking-tight md:text-4xl">{feature.title}</h1>
+      <p class="mt-4 text-lg leading-relaxed text-muted-foreground">{page.intro}</p>
+      <p class="mt-4 text-base leading-relaxed text-muted-foreground">{feature.description}</p>
+
+      {
+        page.sections.map((section) => (
+          <section class="mt-10">
+            <h2 class="text-xl font-bold tracking-tight">{section.heading}</h2>
+            <div class="mt-4 space-y-4 text-base leading-relaxed text-muted-foreground">
+              {section.paragraphs.map((p) => (
+                <p>{p}</p>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+
+      <aside class="mt-12 rounded-2xl border border-border bg-muted/20 p-6">
+        <h2 class="text-lg font-bold">Modul terkait</h2>
+        <ul class="mt-4 space-y-2 text-sm">
+          {
+            related.map((rel) => (
+              <li>
+                <a href={`/fitur/${rel!.slug}/`} class="font-semibold text-brand-blue hover:underline">
+                  {featuresContent.find((f) => f.slug === rel!.slug)?.title}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </aside>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/fitur/" class="modern-btn-ghost text-sm">Semua fitur</a>
+        <a href="/#install" class="modern-btn-primary text-sm">Pasang sekarang</a>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>

@@ -70,7 +70,17 @@ export default function Hero() {
         <div className="space-y-8">
           <FadeContent duration={800} playOnMount>
             <div className="inline-flex items-center gap-3 rounded-full border border-border bg-background/80 px-4 py-2 backdrop-blur-sm">
-              <img src={BRAND_ICON} alt={BRAND_NAME} className="size-7 object-contain" />
+              <img
+                src={BRAND_ICON}
+                srcSet={`${BRAND_ICON} 512w, /logo192.png 192w`}
+                sizes="28px"
+                width={28}
+                height={28}
+                alt={`Logo ${BRAND_NAME}`}
+                className="size-7 object-contain"
+                loading="eager"
+                decoding="async"
+              />
               <span className="text-xs font-semibold text-muted-foreground">
                 {BRAND_NAME} · {BRAND_TAGLINE}
               </span>
