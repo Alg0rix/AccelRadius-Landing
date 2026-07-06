@@ -3,26 +3,17 @@ import {
   BRAND_FULL,
   BRAND_ICON,
   BRAND_NAME,
-  DOCS_URL,
   RELEASE_REPO,
   RELEASES_URL,
   SITE_DESCRIPTION,
 } from "../../lib/brand"
+import { footerNav, resourceLinks } from "../../lib/nav"
 
 const year = new Date().getFullYear()
 
-const nav = [
-  { href: "#fitur", label: "Fitur" },
-  { href: "#harga", label: "Harga" },
-  { href: "#install", label: "Install" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#kontak", label: "Kontak" },
-]
-
 const resources = [
-  { href: DOCS_URL, label: "Dokumentasi", external: true },
+  ...resourceLinks.map((link) => ({ ...link, external: false })),
   { href: RELEASES_URL, label: "Rilis", external: true },
-  { href: "/changelog", label: "Changelog", external: false },
 ]
 
 const legal = [
@@ -52,7 +43,7 @@ const legal = [
         </p>
         <ul class="space-y-2">
           {
-            nav.map((link) => (
+            footerNav.map((link) => (
               <li>
                 <a
                   href={link.href}

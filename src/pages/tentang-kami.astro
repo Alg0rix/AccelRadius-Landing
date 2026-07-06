@@ -1,0 +1,119 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Header from "../components/landing/Header.astro"
+import Footer from "../components/landing/Footer.astro"
+import PageHeader from "../components/landing/PageHeader.astro"
+import { BRAND_FULL, BRAND_NAME, RELEASE_REPO, SUPPORT_EMAIL } from "../lib/brand"
+import { testimonials } from "../lib/landing-content"
+
+const team = [
+  {
+    name: "Tim Produk Accel Radius",
+    role: "Perancang platform billing & operasi ISP",
+    bio: "Mengembangkan modul terintegrasi untuk operator internet di Indonesia — dari manajemen pelanggan hingga kontrol RADIUS MikroTik.",
+  },
+  {
+    name: "Tim Implementasi",
+    role: "Onboarding & migrasi ISP",
+    bio: "Membantu operator mengevaluasi instalasi self-hosted, migrasi data pelanggan, dan konfigurasi gateway pembayaran serta WhatsApp.",
+  },
+  {
+    name: "Tim Dukungan",
+    role: "Support teknis & lisensi",
+    bio: "Menangani pertanyaan instalasi, upgrade versi, dan troubleshooting integrasi jaringan selama jam kerja dan prioritas WhatsApp untuk pelanggan PRO.",
+  },
+]
+---
+
+<Layout
+  title={`Tentang Kami — ${BRAND_FULL}`}
+  description="Accel Radius dibangun untuk operator ISP Indonesia yang membutuhkan sistem billing terpadu, self-hosted, dengan kontrol penuh atas data pelanggan."
+  canonicalPath="/tentang-kami"
+>
+  <Header />
+  <main>
+    <PageHeader
+      eyebrow="Siapa kami"
+      title="Tentang Accel Radius"
+      description="Kami membangun platform billing dan operasi ISP yang di-install di server operator — bukan cloud yang mengunci data Anda."
+    />
+
+    <div class="mx-auto max-w-3xl space-y-12 px-6 py-16 md:py-20">
+      <section class="space-y-4 text-base leading-relaxed text-muted-foreground">
+        <p>
+          {BRAND_NAME} lahir dari masalah yang sama dihadapi ratusan operator internet kecil
+          dan menengah di Indonesia: data pelanggan tersebar, billing tidak terhubung ke
+          jaringan, dan tim operasional kelebihan beban administratif. Kami merancang
+          sembilan modul yang saling terintegrasi — pelanggan, tagihan, pembayaran, RADIUS,
+          WhatsApp, tiket, laporan, portal, dan administrasi — dalam satu instalasi
+          self-hosted.
+        </p>
+        <p>
+          Produk ini dikembangkan oleh tim yang memahami ekosistem ISP lokal: gateway
+          Tripay dan Duitku, autentikasi PPPoE lewat MikroTik, reminder WhatsApp, dan
+          kebutuhan isolir realtime saat pelanggan menunggak. Repositori publik berisi
+          installer, rilis, dan dokumentasi; kode aplikasi inti berlisensi tertutup dengan
+          model lisensi per server tanpa batas pelanggan.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight">Tim</h2>
+        <div class="mt-6 space-y-4">
+          {
+            team.map((member) => (
+              <article class="rounded-2xl border border-border bg-background p-6">
+                <h3 class="text-lg font-bold">{member.name}</h3>
+                <p class="mt-1 text-sm font-medium text-brand-blue">{member.role}</p>
+                <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{member.bio}</p>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold tracking-tight">Dipercaya operator ISP</h2>
+        <div class="mt-6 space-y-4">
+          {
+            testimonials.map((item) => (
+              <blockquote class="rounded-2xl border border-border bg-muted/20 p-6">
+                <p class="text-sm leading-relaxed text-foreground/90">"{item.quote}"</p>
+                <footer class="mt-3 text-xs text-muted-foreground">
+                  {item.role} · {item.region} · {item.scale}
+                </footer>
+              </blockquote>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="rounded-2xl border border-border bg-muted/20 p-6">
+        <h2 class="text-xl font-bold">Hubungi kami</h2>
+        <p class="mt-2 text-sm text-muted-foreground">
+          Pertanyaan produk, lisensi, atau implementasi:
+        </p>
+        <ul class="mt-4 space-y-2 text-sm">
+          <li>
+            Email:{" "}
+            <a href={`mailto:${SUPPORT_EMAIL}`} class="font-semibold text-brand-blue hover:underline">
+              {SUPPORT_EMAIL}
+            </a>
+          </li>
+          <li>
+            Repositori:{" "}
+            <a
+              href={RELEASE_REPO}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-semibold text-brand-blue hover:underline"
+            >
+              GitHub
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Layout>

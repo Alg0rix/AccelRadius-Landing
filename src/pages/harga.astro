@@ -1,0 +1,51 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Header from "../components/landing/Header.astro"
+import Footer from "../components/landing/Footer.astro"
+import PageHeader from "../components/landing/PageHeader.astro"
+import Pricing from "../components/landing/Pricing.astro"
+import Requirements from "../components/landing/Requirements.astro"
+import Faq from "../components/landing/Faq.astro"
+import LandingMotion from "../components/LandingMotion"
+import { BRAND_FULL } from "../lib/brand"
+import { licenseComparison, pricingComparisonNote } from "../lib/landing-content"
+---
+
+<Layout
+  title={`Harga & Lisensi — ${BRAND_FULL}`}
+  description="Paket lisensi Accel Radius: evaluasi gratis 30 hari dan PRO Rp 199.000/bulan per server — pelanggan tanpa batas, tanpa biaya per-pelanggan."
+  canonicalPath="/harga"
+>
+  <Header />
+  <LandingMotion client:load />
+  <main>
+    <PageHeader
+      eyebrow="Lisensi flat per server"
+      title="Harga platform billing ISP Accel Radius"
+      description="Model lisensi yang terprediksi untuk ISP Indonesia: satu server, pelanggan tanpa batas, sembilan modul terintegrasi. Mulai evaluasi gratis sebelum komit produksi."
+    />
+    <Pricing />
+    <Requirements />
+
+    <section class="border-y border-border bg-muted/20 py-16 md:py-20">
+      <div class="mx-auto max-w-3xl px-6">
+        <h2 class="text-2xl font-bold tracking-tight">Perbandingan paket</h2>
+        <p class="mt-3 text-muted-foreground">{pricingComparisonNote}</p>
+        <div class="mt-8 space-y-4">
+          {
+            licenseComparison.map((item) => (
+              <article class="rounded-2xl border border-border bg-background p-6">
+                <h3 class="text-lg font-bold">{item.tier}</h3>
+                <p class="mt-2 text-sm text-muted-foreground">{item.summary}</p>
+                <p class="mt-2 text-xs text-foreground/60">{item.limits}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <Faq />
+  </main>
+  <Footer />
+</Layout>

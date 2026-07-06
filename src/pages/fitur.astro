@@ -1,0 +1,47 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Header from "../components/landing/Header.astro"
+import Footer from "../components/landing/Footer.astro"
+import PageHeader from "../components/landing/PageHeader.astro"
+import FeatureList from "../components/landing/FeatureList.astro"
+import Features from "../components/landing/Features"
+import Integrations from "../components/landing/Integrations.astro"
+import LandingMotion from "../components/LandingMotion"
+import { BRAND_FULL } from "../lib/brand"
+---
+
+<Layout
+  title={`Fitur — ${BRAND_FULL}`}
+  description="Sembilan modul terintegrasi untuk billing ISP Indonesia: pelanggan, tagihan, pembayaran, RADIUS MikroTik, WhatsApp, tiket, laporan, portal, dan admin."
+  canonicalPath="/fitur"
+>
+  <Header />
+  <LandingMotion client:load />
+  <main>
+    <PageHeader
+      eyebrow="Modul platform"
+      title="Fitur Accel Radius untuk operasi ISP"
+      description="Setiap modul dirancang untuk alur kerja operator internet di Indonesia — dari onboarding pelanggan hingga isolir RADIUS terhubung tagihan. Jelajahi sembilan komponen yang menggantikan spreadsheet dan aplikasi terpisah."
+    />
+    <FeatureList />
+    <Features client:visible />
+    <Integrations />
+
+    <section class="border-t border-border py-16 md:py-20">
+      <div class="mx-auto max-w-3xl px-6 text-center">
+        <h2 class="text-2xl font-bold tracking-tight md:text-3xl">
+          Siap evaluasi di server Anda?
+        </h2>
+        <p class="mt-4 text-muted-foreground">
+          Pasang Accel Radius gratis 30 hari dan uji semua modul dengan data operasional
+          ISP Anda sendiri.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="/#install" class="modern-btn-primary">Mulai instalasi</a>
+          <a href="/harga" class="modern-btn-ghost">Lihat harga lisensi</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

@@ -225,9 +225,8 @@ export default function AssistantChat() {
           <header className="flex items-center gap-3 border-b border-border px-4 py-3">
             <img
               src={BRAND_ICON}
-              alt=""
+              alt={`Ikon ${BRAND_NAME}`}
               className="size-8 rounded-lg object-cover"
-              aria-hidden
             />
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-semibold text-foreground">

@@ -19,14 +19,16 @@ import Cta from "../components/landing/Cta"
 import Footer from "../components/landing/Footer.astro"
 import LandingMotion from "../components/LandingMotion"
 import AssistantChat from "../components/landing/AssistantChat"
-import { BRAND_FULL } from "../lib/brand"
+import SeoIntro from "../components/landing/SeoIntro.astro"
+import { DEFAULT_TITLE } from "../lib/seo"
 ---
 
-<Layout title={`${BRAND_FULL} — Platform Billing & Operasi ISP`}>
+<Layout title={DEFAULT_TITLE}>
   <Header />
   <LandingMotion client:load />
   <main>
     <Hero client:only="react" />
+    <SeoIntro />
     <HowItWorks />
     <Compare />
     <FeatureList />

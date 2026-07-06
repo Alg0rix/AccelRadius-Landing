@@ -1,12 +1,14 @@
 ---
-import { DOCS_URL, RELEASES_URL } from "../../lib/brand"
+import { RELEASES_URL } from "../../lib/brand"
 import { resourceLinks } from "../../lib/landing-content"
 
 const hrefMap = {
-  docs: DOCS_URL,
+  docs: "/dokumentasi",
   releases: RELEASES_URL,
   changelog: "/changelog",
 }
+
+const externalKeys = new Set(["releases"])
 ---
 
 <section id="rilis" class="scroll-mt-20 border-b border-border py-16 md:py-20">
@@ -27,8 +29,8 @@ const hrefMap = {
             href={hrefMap[item.hrefKey]}
             data-stagger-item
             data-hover-lift
-            target={item.hrefKey === "changelog" ? undefined : "_blank"}
-            rel={item.hrefKey === "changelog" ? undefined : "noopener noreferrer"}
+            target={externalKeys.has(item.hrefKey) ? "_blank" : undefined}
+            rel={externalKeys.has(item.hrefKey) ? "noopener noreferrer" : undefined}
             class="group flex h-full flex-col rounded-2xl border border-border bg-background p-6 transition-all hover:border-brand-blue/40 hover:shadow-md"
           >
             <h3 class="text-lg font-bold tracking-tight transition-colors group-hover:text-brand-blue">

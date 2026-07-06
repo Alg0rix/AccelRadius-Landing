@@ -12,7 +12,7 @@ export default function Features() {
             Detail modul
           </p>
           <SplitText
-            text="Lihat cara kerja setiap fitur"
+            text="Billing RADIUS MikroTik dan modul operasional ISP"
             tag="h2"
             className="mt-3 text-left text-3xl font-bold leading-[1.05] tracking-tight md:text-4xl lg:text-5xl"
             splitType="words"

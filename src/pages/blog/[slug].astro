@@ -1,0 +1,65 @@
+---
+import Layout from "../../layouts/Layout.astro"
+import Header from "../../components/landing/Header.astro"
+import Footer from "../../components/landing/Footer.astro"
+import { BRAND_FULL } from "../../lib/brand"
+import { blogPosts, getBlogPost } from "../../lib/blog-posts"
+
+export function getStaticPaths() {
+  return blogPosts.map((post) => ({ params: { slug: post.slug } }))
+}
+
+const { slug } = Astro.params
+const post = getBlogPost(slug!)
+
+if (!post) {
+  return Astro.redirect("/blog")
+}
+
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString("id-ID", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  })
+}
+---
+
+<Layout
+  title={`${post.title} — ${BRAND_FULL}`}
+  description={post.description}
+  canonicalPath={`/blog/${post.slug}`}
+  type="article"
+>
+  <Header />
+  <main class="mx-auto max-w-3xl px-6 py-16 md:py-24">
+    <a href="/blog" class="text-sm font-medium text-brand-blue hover:underline">
+      ← Kembali ke blog
+    </a>
+    <header class="mt-6">
+      <div class="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+        <time datetime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
+        <span aria-hidden>·</span>
+        <span>{post.readTime}</span>
+      </div>
+      <h1 class="mt-4 text-3xl font-bold tracking-tight md:text-4xl">{post.title}</h1>
+      <p class="mt-4 text-lg text-muted-foreground">{post.description}</p>
+    </header>
+
+    <article class="prose prose-neutral mt-10 max-w-none space-y-5 text-base leading-relaxed text-muted-foreground">
+      {post.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+    </article>
+
+    <aside class="mt-12 rounded-2xl border border-border bg-muted/30 p-6">
+      <h2 class="text-lg font-bold text-foreground">Coba Accel Radius di server Anda</h2>
+      <p class="mt-2 text-sm text-muted-foreground">
+        Evaluasi gratis 30 hari — semua modul billing, RADIUS, dan WhatsApp terintegrasi.
+      </p>
+      <div class="mt-4 flex flex-wrap gap-3">
+        <a href="/#install" class="modern-btn-primary text-sm">Pasang sekarang</a>
+        <a href="/fitur" class="modern-btn-ghost text-sm">Lihat fitur</a>
+      </div>
+    </aside>
+  </main>
+  <Footer />
+</Layout>

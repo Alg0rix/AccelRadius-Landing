@@ -21,8 +21,10 @@ export function absoluteUrl(path: string) {
   return new URL(path, SITE_URL).toString()
 }
 
+export const DEFAULT_TITLE = `${BRAND_FULL} — Platform Billing & Operasi ISP Indonesia`
+
 export function buildSeo(input: SeoInput = {}) {
-  const title = input.title ?? `${BRAND_FULL} — Platform Billing & Operasi ISP`
+  const title = input.title ?? DEFAULT_TITLE
   const description = input.description ?? SITE_DESCRIPTION
   const path = input.path ?? "/"
   const canonicalUrl = absoluteUrl(path)
@@ -40,5 +42,7 @@ export function buildSeo(input: SeoInput = {}) {
     ogImageAlt: OG_IMAGE_ALT,
     type,
     locale: "id_ID",
+    hreflang: "id",
+    alternateHreflang: "x-default" as const,
   }
 }

@@ -5,7 +5,7 @@ export const PRODUCT_SLUG = "accelradius"
 
 export const SITE_URL = "https://accel-radius.com"
 export const SITE_DESCRIPTION =
-  "Platform billing & operasi all-in-one untuk ISP — manajemen pelanggan, tagihan, pembayaran, kontrol akses, WhatsApp, dan dashboard modern."
+  "Platform billing & operasi all-in-one untuk ISP Indonesia — manajemen pelanggan, tagihan, pembayaran, billing RADIUS MikroTik, WhatsApp, dan dashboard modern."
 
 export const BRAND_LOGO = "/assets/images/accel-radius-logo.png"
 export const BRAND_ICON = "/logo512.png"

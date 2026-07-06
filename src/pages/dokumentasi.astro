@@ -1,0 +1,130 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Header from "../components/landing/Header.astro"
+import Footer from "../components/landing/Footer.astro"
+import PageHeader from "../components/landing/PageHeader.astro"
+import {
+  BRAND_FULL,
+  DOCS_URL,
+  INSTALL_SCRIPT,
+  RELEASES_URL,
+  RELEASE_REPO,
+} from "../lib/brand"
+import {
+  installSteps,
+  postInstallChecklist,
+  systemRequirements,
+  networkPorts,
+} from "../lib/landing-content"
+---
+
+<Layout
+  title={`Dokumentasi — ${BRAND_FULL}`}
+  description="Panduan instalasi, persyaratan server, port jaringan, dan sumber dokumentasi Accel Radius untuk operator ISP."
+  canonicalPath="/dokumentasi"
+>
+  <Header />
+  <main>
+    <PageHeader
+      eyebrow="Panduan teknis"
+      title="Dokumentasi Accel Radius"
+      description="Ringkasan instalasi dan konfigurasi awal. Dokumentasi lengkap tersedia di repositori rilis GitHub."
+    />
+
+    <div class="mx-auto max-w-3xl space-y-12 px-6 py-16 md:py-20">
+      <section>
+        <h2 class="text-xl font-bold">Instalasi cepat</h2>
+        <p class="mt-2 text-sm text-muted-foreground">
+          Jalankan installer satu baris di Ubuntu atau Debian dengan akses sudo:
+        </p>
+        <pre class="mt-4 overflow-x-auto rounded-xl border border-border bg-muted/50 p-4 font-mono text-sm">
+          <code>{INSTALL_SCRIPT}</code>
+        </pre>
+        <ol class="mt-6 list-decimal space-y-2 pl-5 text-sm text-muted-foreground">
+          {installSteps.map((step) => <li>{step}</li>)}
+        </ol>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold">Checklist setelah instalasi</h2>
+        <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-muted-foreground">
+          {postInstallChecklist.map((item) => <li>{item}</li>)}
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold">Persyaratan server</h2>
+        <div class="mt-4 grid gap-4 sm:grid-cols-2">
+          {
+            systemRequirements.map((group) => (
+              <div class="rounded-2xl border border-border bg-background p-5">
+                <h3 class="font-bold">{group.title}</h3>
+                <ul class="mt-2 list-disc space-y-1 pl-4 text-sm text-muted-foreground">
+                  {group.items.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold">Port jaringan</h2>
+        <ul class="mt-4 space-y-3">
+          {
+            networkPorts.map((entry) => (
+              <li class="rounded-xl border border-border bg-background p-4 text-sm">
+                <span class="font-mono font-semibold text-foreground">{entry.port}</span>
+                <span class="text-muted-foreground"> — {entry.purpose}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="rounded-2xl border border-border bg-muted/20 p-6">
+        <h2 class="text-xl font-bold">Sumber resmi</h2>
+        <ul class="mt-4 space-y-3 text-sm">
+          <li>
+            <a
+              href={DOCS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-semibold text-brand-blue hover:underline"
+            >
+              README &amp; dokumentasi repositori
+            </a>
+          </li>
+          <li>
+            <a
+              href={RELEASES_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-semibold text-brand-blue hover:underline"
+            >
+              Rilis &amp; unduhan versi
+            </a>
+          </li>
+          <li>
+            <a href="/changelog" class="font-semibold text-brand-blue hover:underline">
+              Changelog &amp; prosedur upgrade
+            </a>
+          </li>
+          <li>
+            <a
+              href={RELEASE_REPO}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-semibold text-brand-blue hover:underline"
+            >
+              GitHub — {RELEASE_REPO}
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Layout>

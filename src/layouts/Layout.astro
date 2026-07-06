@@ -48,6 +48,8 @@ const jsonLd = {
     <meta name="description" content={seo.description} />
     <meta name="theme-color" content="#2B5FD9" />
     <link rel="canonical" href={seo.canonicalUrl} />
+    <link rel="alternate" hreflang={seo.hreflang} href={seo.canonicalUrl} />
+    <link rel="alternate" hreflang={seo.alternateHreflang} href={seo.canonicalUrl} />
     <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/logo192.png" />
     <meta name="generator" content={Astro.generator} />

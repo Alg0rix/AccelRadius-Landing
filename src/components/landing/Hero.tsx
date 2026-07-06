@@ -139,7 +139,7 @@ export default function Hero() {
               <p className="text-xs leading-relaxed text-muted-foreground">
                 Evaluasi gratis di server Anda — atau{" "}
                 <a
-                  href="#harga"
+                  href="/harga"
                   className="font-medium text-foreground underline-offset-2 hover:text-brand-red hover:underline"
                 >
                   lihat paket lisensi

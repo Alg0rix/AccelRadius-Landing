@@ -1,13 +1,6 @@
 ---
 import { BRAND_ICON, BRAND_NAME, BRAND_TAGLINE } from "../../lib/brand"
-
-const nav = [
-  { href: "#fitur", label: "Fitur" },
-  { href: "#harga", label: "Harga" },
-  { href: "#install", label: "Install" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#kontak", label: "Kontak" },
-]
+import { mainNav } from "../../lib/nav"
 ---
 
 <header class="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
@@ -21,7 +14,7 @@ const nav = [
     </a>
     <nav class="flex items-center gap-0.5 sm:gap-1">
       {
-        nav.map((item) => (
+        mainNav.map((item) => (
           <a
             href={item.href}
             class="rounded-full px-2.5 py-2 text-[11px] font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:px-3 sm:text-sm"
